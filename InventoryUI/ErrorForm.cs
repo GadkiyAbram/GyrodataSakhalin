@@ -18,7 +18,8 @@ namespace InventoryUI
 
             foreach (string error in errors)
             {
-                ErrorsDescription.Text += error + '\n';
+                //ErrorsDescription.Text += error + '\n';
+                ErrorsDescription.Text += $" * { error } \n";
             }
         }
 

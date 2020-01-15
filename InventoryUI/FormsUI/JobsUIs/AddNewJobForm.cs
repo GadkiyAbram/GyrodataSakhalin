@@ -141,6 +141,8 @@ namespace InventoryUI.FormsUI.JobsUIs
         // TODO - Complete Job's validation
         private bool ValidateForm()
         {
+            // Clear errorAddJob List to renew errors if they come up
+            errorsAddJob.Clear();
             // TODO - check if Item already exists
             bool output = true;
             errorsAddJob.Clear();

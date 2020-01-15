@@ -63,8 +63,13 @@ namespace InventoryUI
             // TODO - check if Item already exists
             bool output = true;
             errorsItem.Clear();
-            
-            // Item validation - not needed as the GWD Items List fixed
+
+            // Item validation - check if exists one already
+            if (SqlConnector.CheckIfItemExists(itemItemText.Text, itemAssetText.Text).Count != 0)
+            {
+                output = false;
+                errorsItem.Add($"{ itemItemText.Text } { itemAssetText.Text } already exists");
+            }
             
             // asset validation
             if (itemAssetText.Text.Length > 20)

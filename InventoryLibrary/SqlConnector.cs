@@ -328,5 +328,19 @@ namespace InventoryLibrary
 
             }
         }
+
+        // Check if inserting Item alredy exists in DB
+        public static List<ItemModel> CheckIfItemExists(string item, string asset)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("GyrodataTracker")))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@ItemItem", item);
+                p.Add("@ItemAsset", asset);
+
+                return connection.Query<ItemModel>("spCheckIfItemExitst", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }

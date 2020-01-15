@@ -138,6 +138,7 @@ namespace InventoryUI.FormsUI.JobsUIs
         private bool ValidateEditJob()
         {
             bool output = true;
+            errorsEditJob.Clear();
 
             // ModemVersion validating
             //if (editJobModemText.Text.Length != 0)
