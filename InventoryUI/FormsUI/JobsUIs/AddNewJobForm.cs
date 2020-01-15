@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using InventoryLibrary.Validation.ToolValidation;
 
 namespace InventoryUI.FormsUI.JobsUIs
 {
     public partial class AddNewJobForm : Form
     {
-        public List<string> errorsJob = new List<string>();
+        public List<string> errorsAddJob = new List<string>();
 
         public AddNewJobForm()
         {
@@ -65,6 +66,8 @@ namespace InventoryUI.FormsUI.JobsUIs
             jobEngTwoComboBox.DataSource = SqlConnector.GetEngineerData();
             jobEngOneComboBox.DisplayMember = "EngineerName";
             jobEngTwoComboBox.DisplayMember = "EngineerName";
+            jobEngOneComboBox.SelectedIndex = 8;
+            jobEngTwoComboBox.SelectedIndex = 8;
         }
 
         private void LoadBatteriesToComboBox()
@@ -130,7 +133,7 @@ namespace InventoryUI.FormsUI.JobsUIs
             }
             else
             {
-                ErrorForm errorForm = new ErrorForm(errorsJob);
+                ErrorForm errorForm = new ErrorForm(errorsAddJob);
                 errorForm.Show();
             }
         }
@@ -140,24 +143,121 @@ namespace InventoryUI.FormsUI.JobsUIs
         {
             // TODO - check if Item already exists
             bool output = true;
-            errorsJob.Clear();
+            errorsAddJob.Clear();
 
-            // item validation
+            // JobNumber validation
             JobNumberValidation jobValidation = new JobNumberValidation(jobNumberText.Text);
             if (jobNumberText.Text == null)
             {
                 output = false;
-                errorsJob.Add("Job Number couldn't be empty");
+                errorsAddJob.Add("Job Number couldn't be empty");
             }
             if (jobNumberText.Text.Length > 12)
             {
                 output = false;
-                errorsJob.Add("Job Number Length should be <= 12");
+                errorsAddJob.Add("Job Number Length should be <= 12");
             }
             if (!jobValidation.ValidateItem())
             {
                 output = false;
-                errorsJob.Add("Wrong Job Number pattern");
+                errorsAddJob.Add("Wrong Job Number pattern");
+            }
+
+            // Circulation validating
+            if (jobCirculationHoursText.Text.Length != 0)
+            {
+                float circulation = 0;
+                bool ValidateCirculation = float.TryParse(jobCirculationHoursText.Text, out circulation);
+                if (!ValidateCirculation)
+                {
+                    output = false;
+                    errorsAddJob.Add("Wrong Circulation value");
+                }
+            }
+
+            // Enginners validation. Not one to be selected as both engs
+            // N/A COULD BE selected for both
+            if (jobEngOneComboBox.SelectedIndex != 8 && jobEngTwoComboBox.SelectedIndex != 8)
+            {
+                if (jobEngOneComboBox.Text == jobEngTwoComboBox.Text)
+                {
+                    output = false;
+                    errorsAddJob.Add("One Engineer can not be selected as both");
+                }
+            }
+            
+
+            // MaxTemperature validating
+            if (jobMaxTemperatureText.Text.Length != 0)
+            {
+                float maxTemperature = 0;
+                bool ValidateMaxTemperature = float.TryParse(jobMaxTemperatureText.Text, out maxTemperature);
+                if (!ValidateMaxTemperature)
+                {
+                    output = false;
+                    errorsAddJob.Add("Wrong Max Temperature value");
+                }
+            }
+
+            // Dates validating, Engs Arrvied / Left, Container Arr / Left
+            DateValidation dateEng1ArrivedValidation = new DateValidation(jobEng1ArrivedText.Text);
+            if (jobEng1ArrivedText.Text.Length > 0)
+            {
+                if (!dateEng1ArrivedValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Arrived Eng1 Date invalid");
+                }
+            }
+
+            DateValidation dateEng2ArrivedValidation = new DateValidation(jobEng2ArrivedText.Text);
+            if (jobEng2ArrivedText.Text.Length > 0)
+            {
+                if (!dateEng2ArrivedValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Arrived Eng2 Date invalid");
+                }
+            }
+
+            DateValidation dateEng1LeftValidation = new DateValidation(jobEng1LeftText.Text);
+            if (jobEng1LeftText.Text.Length > 0)
+            {
+                if (!dateEng1LeftValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Left Eng1 Date invalid");
+                }
+            }
+
+            DateValidation dateEng2LeftValidation = new DateValidation(jobEng2LeftText.Text);
+            if (jobEng2LeftText.Text.Length > 0)
+            {
+                if (!dateEng2LeftValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Left Eng2 Date invalid");
+                }
+            }
+
+            DateValidation dateContainerArrValidation = new DateValidation(jobContArrivedText.Text);
+            if (jobContArrivedText.Text.Length > 0)
+            {
+                if (!dateContainerArrValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Container Arrived Date invalid");
+                }
+            }
+
+            DateValidation dateContainerLeftValidation = new DateValidation(jobContLeftText.Text);
+            if (jobContLeftText.Text.Length > 0)
+            {
+                if (!dateContainerLeftValidation.ValidateDate())
+                {
+                    output = false;
+                    errorsAddJob.Add("Container Left Date invalid");
+                }
             }
 
             return output;

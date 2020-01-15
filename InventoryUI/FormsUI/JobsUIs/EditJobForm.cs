@@ -77,6 +77,7 @@ namespace InventoryUI.FormsUI.JobsUIs
 
                 editJobRigText.Text = jobModel.Rig;
                 // TODO - refactor combobox to appropriate format
+
                 editJobCommentText.Text = jobModel.Comment;
             }
             catch (Exception e)
