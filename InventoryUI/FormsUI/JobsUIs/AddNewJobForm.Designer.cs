@@ -574,6 +574,7 @@
             this.Controls.Add(this.jobLabel);
             this.Controls.Add(this.AddingNewJobLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AddNewJobForm";
             this.Text = "AddNewJobForm";

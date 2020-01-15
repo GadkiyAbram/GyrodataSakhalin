@@ -19,7 +19,7 @@ namespace InventoryUI
             BatteriesAllLoad();
         }
 
-        private void AddNewIBatteryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void AddNewBatteryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             AddNewBatteryForm addNewBattery = new AddNewBatteryForm();
             addNewBattery.Show();
@@ -27,7 +27,7 @@ namespace InventoryUI
 
         private void BatteriesAllLoad()
         {
-            batteriesGridView.DataSource = SqlConnector.GetBatteriesData();
+            batteriesGridView.DataSource = SqlConnector.GetCustomBatteryData("", "");
 
         }
 

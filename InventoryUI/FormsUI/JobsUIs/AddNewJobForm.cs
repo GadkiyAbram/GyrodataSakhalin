@@ -21,6 +21,7 @@ namespace InventoryUI.FormsUI.JobsUIs
         {
             InitializeComponent();
             WireUpComboBoxes();
+            jobIssuesComboBox.SelectedIndex = 0;
         }
 
         public void WireUpComboBoxes()

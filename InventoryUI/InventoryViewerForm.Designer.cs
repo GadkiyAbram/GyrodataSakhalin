@@ -43,7 +43,7 @@
             this.GyrodataSakhalinLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.GyrodataSakhalinLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GyrodataSakhalinLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.GyrodataSakhalinLabel.Location = new System.Drawing.Point(16, 9);
+            this.GyrodataSakhalinLabel.Location = new System.Drawing.Point(9, 6);
             this.GyrodataSakhalinLabel.Name = "GyrodataSakhalinLabel";
             this.GyrodataSakhalinLabel.Size = new System.Drawing.Size(273, 30);
             this.GyrodataSakhalinLabel.TabIndex = 0;
@@ -120,8 +120,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(307, 356);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(305, 356);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.extrasButton);
             this.Controls.Add(this.lithiumBatteriesButton);
@@ -129,10 +129,10 @@
             this.Controls.Add(this.gwdGyroEquipmentButton);
             this.Controls.Add(this.GyrodataSakhalinLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "InventoryViewerForm";
+            this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
             this.Text = "Sakhalin Inventory";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -54,7 +54,7 @@ namespace InventoryLibrary
             this.EngineerOneLeft = engineerOneLeft;
             this.EngineerTwoLeft = engineerTwoLeft;
             this.Container = container;
-            this.ContainerArrived = ContainerArrived;
+            this.ContainerArrived = containerArrived;
             this.ContainerLeft = containerLeft;
             this.Rig = rig;
             this.Issues = issues;
