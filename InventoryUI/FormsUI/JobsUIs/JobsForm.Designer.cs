@@ -70,7 +70,7 @@
             this.jobsGridView.Name = "jobsGridView";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.jobsGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.jobsGridView.Size = new System.Drawing.Size(780, 392);
+            this.jobsGridView.Size = new System.Drawing.Size(781, 392);
             this.jobsGridView.TabIndex = 1;
             // 
             // AddNewJobLink
@@ -93,7 +93,7 @@
             this.editJobsLink.AutoSize = true;
             this.editJobsLink.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editJobsLink.LinkColor = System.Drawing.Color.DimGray;
-            this.editJobsLink.Location = new System.Drawing.Point(430, 11);
+            this.editJobsLink.Location = new System.Drawing.Point(431, 11);
             this.editJobsLink.Name = "editJobsLink";
             this.editJobsLink.Size = new System.Drawing.Size(71, 21);
             this.editJobsLink.TabIndex = 3;
@@ -116,7 +116,7 @@
             "Modem",
             "Bullplug",
             "Battery"});
-            this.searchJobComboBox.Location = new System.Drawing.Point(507, 11);
+            this.searchJobComboBox.Location = new System.Drawing.Point(508, 11);
             this.searchJobComboBox.Name = "searchJobComboBox";
             this.searchJobComboBox.Size = new System.Drawing.Size(121, 24);
             this.searchJobComboBox.TabIndex = 29;
@@ -126,7 +126,7 @@
             this.searchJobText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchJobText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchJobText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchJobText.Location = new System.Drawing.Point(634, 12);
+            this.searchJobText.Location = new System.Drawing.Point(635, 12);
             this.searchJobText.Name = "searchJobText";
             this.searchJobText.Size = new System.Drawing.Size(119, 22);
             this.searchJobText.TabIndex = 28;
@@ -139,7 +139,7 @@
             this.refreshJobButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.refreshJobButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.refreshJobButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshJobButton.Image")));
-            this.refreshJobButton.Location = new System.Drawing.Point(759, 8);
+            this.refreshJobButton.Location = new System.Drawing.Point(760, 8);
             this.refreshJobButton.Name = "refreshJobButton";
             this.refreshJobButton.Size = new System.Drawing.Size(28, 32);
             this.refreshJobButton.TabIndex = 27;
@@ -151,7 +151,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(800, 451);
+            this.ClientSize = new System.Drawing.Size(801, 451);
             this.Controls.Add(this.searchJobComboBox);
             this.Controls.Add(this.searchJobText);
             this.Controls.Add(this.refreshJobButton);
@@ -160,6 +160,7 @@
             this.Controls.Add(this.jobsGridView);
             this.Name = "JobsForm";
             this.Text = "Jobs Form";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JobsForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.jobsGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

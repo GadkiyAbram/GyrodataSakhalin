@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewItemForm));
             this.AddingNewItemToolLabel = new System.Windows.Forms.Label();
             this.itemLabel = new System.Windows.Forms.Label();
             this.itemAssetText = new System.Windows.Forms.TextBox();
@@ -52,6 +53,12 @@
             this.addItemButton = new System.Windows.Forms.Button();
             this.itemItemText = new System.Windows.Forms.ComboBox();
             this.itemBoxText = new System.Windows.Forms.ComboBox();
+            this.itemImageLabel = new System.Windows.Forms.Label();
+            this.itemPictureBox = new System.Windows.Forms.PictureBox();
+            this.browseImageButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.itemPictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // AddingNewItemToolLabel
@@ -60,7 +67,7 @@
             this.AddingNewItemToolLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddingNewItemToolLabel.Location = new System.Drawing.Point(10, 11);
             this.AddingNewItemToolLabel.Name = "AddingNewItemToolLabel";
-            this.AddingNewItemToolLabel.Size = new System.Drawing.Size(212, 25);
+            this.AddingNewItemToolLabel.Size = new System.Drawing.Size(210, 25);
             this.AddingNewItemToolLabel.TabIndex = 0;
             this.AddingNewItemToolLabel.Text = "Adding New Item / Tool";
             // 
@@ -80,6 +87,7 @@
             this.itemAssetText.Name = "itemAssetText";
             this.itemAssetText.Size = new System.Drawing.Size(209, 22);
             this.itemAssetText.TabIndex = 4;
+            this.itemAssetText.Text = "A4552";
             // 
             // assetLabel
             // 
@@ -97,6 +105,7 @@
             this.itemArrivedText.Name = "itemArrivedText";
             this.itemArrivedText.Size = new System.Drawing.Size(209, 22);
             this.itemArrivedText.TabIndex = 6;
+            this.itemArrivedText.Text = "2017-11-11";
             // 
             // label1
             // 
@@ -114,6 +123,7 @@
             this.itemInvoiceText.Name = "itemInvoiceText";
             this.itemInvoiceText.Size = new System.Drawing.Size(209, 22);
             this.itemInvoiceText.TabIndex = 8;
+            this.itemInvoiceText.Text = "O/11/22";
             // 
             // invoiceLabel
             // 
@@ -131,6 +141,7 @@
             this.itemCcdText.Name = "itemCcdText";
             this.itemCcdText.Size = new System.Drawing.Size(209, 22);
             this.itemCcdText.TabIndex = 10;
+            this.itemCcdText.Text = "10707090-021216-0014969";
             // 
             // ccdLabel
             // 
@@ -165,13 +176,14 @@
             this.itemPositionCcdText.Name = "itemPositionCcdText";
             this.itemPositionCcdText.Size = new System.Drawing.Size(209, 22);
             this.itemPositionCcdText.TabIndex = 14;
+            this.itemPositionCcdText.Text = "11";
             // 
             // positionCcdLabel
             // 
             this.positionCcdLabel.AutoSize = true;
             this.positionCcdLabel.Location = new System.Drawing.Point(11, 216);
             this.positionCcdLabel.Name = "positionCcdLabel";
-            this.positionCcdLabel.Size = new System.Drawing.Size(101, 21);
+            this.positionCcdLabel.Size = new System.Drawing.Size(100, 21);
             this.positionCcdLabel.TabIndex = 13;
             this.positionCcdLabel.Text = "Position CCD";
             // 
@@ -182,13 +194,14 @@
             this.itemStatusText.Name = "itemStatusText";
             this.itemStatusText.Size = new System.Drawing.Size(209, 22);
             this.itemStatusText.TabIndex = 16;
+            this.itemStatusText.Text = "SLB Base";
             // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Location = new System.Drawing.Point(11, 244);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(53, 21);
+            this.statusLabel.Size = new System.Drawing.Size(52, 21);
             this.statusLabel.TabIndex = 15;
             this.statusLabel.Text = "Status";
             // 
@@ -208,6 +221,7 @@
             this.itemContainerText.Name = "itemContainerText";
             this.itemContainerText.Size = new System.Drawing.Size(209, 22);
             this.itemContainerText.TabIndex = 20;
+            this.itemContainerText.Text = "KAA-011";
             // 
             // containerLabel
             // 
@@ -225,6 +239,7 @@
             this.itemCommentText.Name = "itemCommentText";
             this.itemCommentText.Size = new System.Drawing.Size(209, 22);
             this.itemCommentText.TabIndex = 22;
+            this.itemCommentText.Text = "test image api insert";
             // 
             // commentLabel
             // 
@@ -239,9 +254,9 @@
             // 
             this.addItemButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.addItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addItemButton.Location = new System.Drawing.Point(12, 373);
+            this.addItemButton.Location = new System.Drawing.Point(10, 576);
             this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(317, 39);
+            this.addItemButton.Size = new System.Drawing.Size(318, 39);
             this.addItemButton.TabIndex = 23;
             this.addItemButton.Text = "ADD ITEM";
             this.addItemButton.UseVisualStyleBackColor = false;
@@ -267,11 +282,55 @@
             this.itemBoxText.Size = new System.Drawing.Size(209, 29);
             this.itemBoxText.TabIndex = 26;
             // 
+            // itemImageLabel
+            // 
+            this.itemImageLabel.AutoSize = true;
+            this.itemImageLabel.Location = new System.Drawing.Point(11, 365);
+            this.itemImageLabel.Name = "itemImageLabel";
+            this.itemImageLabel.Size = new System.Drawing.Size(88, 21);
+            this.itemImageLabel.TabIndex = 27;
+            this.itemImageLabel.Text = "Item Image";
+            // 
+            // itemPictureBox
+            // 
+            this.itemPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("itemPictureBox.Image")));
+            this.itemPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.itemPictureBox.Name = "itemPictureBox";
+            this.itemPictureBox.Size = new System.Drawing.Size(311, 183);
+            this.itemPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.itemPictureBox.TabIndex = 28;
+            this.itemPictureBox.TabStop = false;
+            // 
+            // browseImageButton
+            // 
+            this.browseImageButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.browseImageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.browseImageButton.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.browseImageButton.Location = new System.Drawing.Point(120, 365);
+            this.browseImageButton.Name = "browseImageButton";
+            this.browseImageButton.Size = new System.Drawing.Size(209, 25);
+            this.browseImageButton.TabIndex = 29;
+            this.browseImageButton.Text = "BROWSE IMAGE";
+            this.browseImageButton.UseVisualStyleBackColor = false;
+            this.browseImageButton.Click += new System.EventHandler(this.browseImageButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.itemPictureBox);
+            this.panel1.Location = new System.Drawing.Point(10, 396);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(317, 168);
+            this.panel1.TabIndex = 30;
+            // 
             // AddNewItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 424);
+            this.ClientSize = new System.Drawing.Size(341, 627);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.browseImageButton);
+            this.Controls.Add(this.itemImageLabel);
             this.Controls.Add(this.itemBoxText);
             this.Controls.Add(this.itemItemText);
             this.Controls.Add(this.addItemButton);
@@ -299,9 +358,11 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.DimGray;
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.MaximumSize = new System.Drawing.Size(357, 462);
             this.Name = "AddNewItemForm";
             this.Text = "Add New Item";
+            ((System.ComponentModel.ISupportInitialize)(this.itemPictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,5 +394,9 @@
         private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.ComboBox itemItemText;
         private System.Windows.Forms.ComboBox itemBoxText;
+        private System.Windows.Forms.Label itemImageLabel;
+        private System.Windows.Forms.PictureBox itemPictureBox;
+        private System.Windows.Forms.Button browseImageButton;
+        private System.Windows.Forms.Panel panel1;
     }
 }

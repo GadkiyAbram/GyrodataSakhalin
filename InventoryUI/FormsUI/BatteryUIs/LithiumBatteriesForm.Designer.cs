@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LithiumBatteriesForm));
             this.AddNewIBatteryLink = new System.Windows.Forms.LinkLabel();
             this.batteriesGridView = new System.Windows.Forms.DataGridView();
@@ -38,6 +38,7 @@
             this.searchBatteryText = new System.Windows.Forms.TextBox();
             this.refreshbatteryButton = new System.Windows.Forms.Button();
             this.AddNewBatteryLink = new System.Windows.Forms.LinkLabel();
+            this.editBatteryLink = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.batteriesGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,34 +63,34 @@
             this.batteriesGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.batteriesGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.batteriesGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.batteriesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.batteriesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.batteriesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.batteriesGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.batteriesGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.batteriesGridView.Location = new System.Drawing.Point(8, 39);
             this.batteriesGridView.Name = "batteriesGridView";
             this.batteriesGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.batteriesGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.batteriesGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.batteriesGridView.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.batteriesGridView.Size = new System.Drawing.Size(780, 391);
             this.batteriesGridView.TabIndex = 3;
@@ -148,11 +149,27 @@
             this.AddNewBatteryLink.VisitedLinkColor = System.Drawing.Color.DimGray;
             this.AddNewBatteryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AddNewBatteryLink_LinkClicked);
             // 
+            // editBatteryLink
+            // 
+            this.editBatteryLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.editBatteryLink.AutoSize = true;
+            this.editBatteryLink.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.editBatteryLink.LinkColor = System.Drawing.Color.DimGray;
+            this.editBatteryLink.Location = new System.Drawing.Point(422, 7);
+            this.editBatteryLink.Name = "editBatteryLink";
+            this.editBatteryLink.Size = new System.Drawing.Size(80, 19);
+            this.editBatteryLink.TabIndex = 31;
+            this.editBatteryLink.TabStop = true;
+            this.editBatteryLink.Text = "Edit Battery";
+            this.editBatteryLink.VisitedLinkColor = System.Drawing.Color.DimGray;
+            this.editBatteryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.editBatteryLink_LinkClicked);
+            // 
             // LithiumBatteriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 453);
+            this.Controls.Add(this.editBatteryLink);
             this.Controls.Add(this.AddNewBatteryLink);
             this.Controls.Add(this.searchBatteryComboBox);
             this.Controls.Add(this.searchBatteryText);
@@ -161,6 +178,7 @@
             this.Name = "LithiumBatteriesForm";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
             this.Text = "Lithium Batteries";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LithiumBatteriesForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.batteriesGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -175,5 +193,6 @@
         private System.Windows.Forms.TextBox searchBatteryText;
         private System.Windows.Forms.Button refreshbatteryButton;
         private System.Windows.Forms.LinkLabel AddNewBatteryLink;
+        private System.Windows.Forms.LinkLabel editBatteryLink;
     }
 }

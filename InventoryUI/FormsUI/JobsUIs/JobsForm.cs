@@ -1,24 +1,26 @@
 ﻿using InventoryLibrary;
+using InventoryUI.ApiHelpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryUI.FormsUI.JobsUIs
 {
     public partial class JobsForm : Form
     {
-        List<JobModel> jobList = new List<JobModel>();
+        string pathJobsAll = "PathJobsAll";
+        public static int countJobsInstance = 0;
 
         public JobsForm()
         {
             InitializeComponent();
-            JobCustomLoad("", "");
+            countJobsInstance++;
+            JobCustomLoad("", "", pathJobsAll);
+            searchJobComboBox.SelectedIndex = 0;
         }
 
         private void AddNewJobLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -29,51 +31,32 @@ namespace InventoryUI.FormsUI.JobsUIs
 
         private void editJobsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            jobList = LoadAllJobsToComboBox();
+            List<JobModel> jobList = ApiConnectorHelper.DataLoad<JobModel>("", "", pathJobsAll);
             EditJobForm editJobForm = new EditJobForm(jobList);
             editJobForm.Show();
         }
 
-        private List<JobModel> LoadAllJobsToComboBox()
+        private void JobCustomLoad(string what, string where, string path)
         {
-            return SqlConnector.GetAllJobsData();
-        }
-
-        // TODO - Check if you need this
-        private void LoadAllJobsData()
-        {
-            jobsGridView.DataSource = SqlConnector.GetAllJobsData();
-        }
-
-        private void JobCustomLoad(string what, string where)
-        {
-            jobsGridView.DataSource = SqlConnector.GetCustomJobData(what, where);
+            jobsGridView.DataSource = ApiConnectorHelper.DataLoad<JobModel>(what, where, path);
         }
 
         private void refreshJobButton_Click(object sender, EventArgs e)
         {
+            getSelectedJobData();
+        }
+
+        private void getSelectedJobData()
+        {
             string searchJob = searchJobText.Text;
-            switch (searchJobComboBox.Text)
-            {
-                case "GDP Sections":
-                    JobCustomLoad(searchJob, "GDP Sections");
-                    break;
-                case "Job Number":
-                    JobCustomLoad(searchJob, "Job Number");
-                    break;
-                case "Modem":
-                    JobCustomLoad(searchJob, "Modem");
-                    break;
-                case "Bullplug":
-                    JobCustomLoad(searchJob, "Bullplug");
-                    break;
-                case "Battery":
-                    JobCustomLoad(searchJob, "Battery");
-                    break;
-                case "":
-                    JobCustomLoad("", "");
-                    break;
-            }
+            string searchItemComboBox = searchJobComboBox.Text;
+
+            JobCustomLoad(searchJob, searchItemComboBox, pathJobsAll);
+        }
+
+        private void JobsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            countJobsInstance = 0;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace InventoryUI
             InventoryLibrary.GlobalConfig.InitializeConnections(true);
 
             Application.Run(new InventoryViewerForm());
-            //Application.Run(new AddNewItemForm());
+            //Application.Run(new ErrorForm(new List<string>()));
         }
     }
 }

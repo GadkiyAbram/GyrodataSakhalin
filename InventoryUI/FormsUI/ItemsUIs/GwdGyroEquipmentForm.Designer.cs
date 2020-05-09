@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GwdGyroEquipmentForm));
             this.gwdGyroGridView = new System.Windows.Forms.DataGridView();
             this.AddNewItemLink = new System.Windows.Forms.LinkLabel();
@@ -43,7 +45,25 @@
             this.gwdGyroGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gwdGyroGridView.BackgroundColor = System.Drawing.Color.White;
+            this.gwdGyroGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gwdGyroGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gwdGyroGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gwdGyroGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.gwdGyroGridView.Location = new System.Drawing.Point(10, 47);
             this.gwdGyroGridView.Name = "gwdGyroGridView";
             this.gwdGyroGridView.Size = new System.Drawing.Size(780, 391);
@@ -91,6 +111,9 @@
             // searchItemComboBox
             // 
             this.searchItemComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchItemComboBox.BackColor = System.Drawing.Color.White;
+            this.searchItemComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchItemComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchItemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchItemComboBox.FormattingEnabled = true;
             this.searchItemComboBox.Items.AddRange(new object[] {
@@ -105,15 +128,16 @@
             // 
             // checkItemLink
             // 
+            this.checkItemLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkItemLink.AutoSize = true;
             this.checkItemLink.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.checkItemLink.LinkColor = System.Drawing.Color.DimGray;
-            this.checkItemLink.Location = new System.Drawing.Point(425, 15);
+            this.checkItemLink.Location = new System.Drawing.Point(439, 16);
             this.checkItemLink.Name = "checkItemLink";
-            this.checkItemLink.Size = new System.Drawing.Size(78, 19);
+            this.checkItemLink.Size = new System.Drawing.Size(64, 19);
             this.checkItemLink.TabIndex = 27;
             this.checkItemLink.TabStop = true;
-            this.checkItemLink.Text = "Check Item";
+            this.checkItemLink.Text = "Edit Item";
             this.checkItemLink.VisitedLinkColor = System.Drawing.Color.DimGray;
             this.checkItemLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkItemLink_LinkClicked);
             // 
@@ -131,6 +155,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GwdGyroEquipmentForm";
             this.Text = "GWD / GYRO Equipment";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GwdGyroEquipmentForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.gwdGyroGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

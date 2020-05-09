@@ -13,10 +13,10 @@ namespace InventoryLibrary
         public string BatteryCondition { get; set; }
         public string SerialOne { get; set; }
         public string SerialTwo { get; set; }
-        public string SerialThree { get; set; }
+        public string SerialThr { get; set; }
         public string CCD { get; set; }
         public string Invoice { get; set; }
-        public string Status { get; set; }
+        public string BatteryStatus { get; set; }
         public string Arrived { get; set; }
         public string Container { get; set; }
         public string Comment { get; set; }
@@ -31,10 +31,10 @@ namespace InventoryLibrary
             this.BatteryCondition = batteryCondition;
             this.SerialOne = serialOne;
             this.SerialTwo = serialTwo;
-            this.SerialThree = serialThree;
+            this.SerialThr = serialThree;
             this.CCD = ccd;
             this.Invoice = invoice;
-            this.Status = status;
+            this.BatteryStatus = status;
             this.Arrived = arrived;
             this.Container = container;
             this.Comment = comment;

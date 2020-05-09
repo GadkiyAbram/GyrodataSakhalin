@@ -1,18 +1,13 @@
 ﻿using InventoryUI.FormsUI.JobsUIs;
+using InventoryUI.FormsUI.SettingsUI;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryUI
 {
     public partial class InventoryViewerForm : Form
     {
+
         public InventoryViewerForm()
         {
             InitializeComponent();
@@ -20,8 +15,11 @@ namespace InventoryUI
 
         private void gwdGyroEquipmentButton_Click(object sender, EventArgs e)
         {
-            GwdGyroEquipmentForm gwdGyroEquipment = new GwdGyroEquipmentForm();
-            gwdGyroEquipment.Show();
+            if (GwdGyroEquipmentForm.countItemsInstance == 0)
+            {
+                GwdGyroEquipmentForm gwdGyroEquipment = new GwdGyroEquipmentForm();
+                gwdGyroEquipment.Show(); 
+            }
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -31,14 +29,29 @@ namespace InventoryUI
 
         private void jobInformationButton_Click(object sender, EventArgs e)
         {
-            JobsForm jobsForm = new JobsForm();
-            jobsForm.Show();
+            if (JobsForm.countJobsInstance == 0)
+            {
+                JobsForm jobsForm = new JobsForm();
+                jobsForm.Show();
+            }
         }
 
         private void lithiumBatteriesButton_Click(object sender, EventArgs e)
         {
-            LithiumBatteriesForm lithiumBatteries = new LithiumBatteriesForm();
-            lithiumBatteries.Show();
+            if (LithiumBatteriesForm.countLithiumInstance == 0)
+            {
+                LithiumBatteriesForm lithiumBatteries = new LithiumBatteriesForm();
+                lithiumBatteries.Show(); 
+            }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            if (SettingsForm.countExtrasInstance == 0)
+            {
+                SettingsForm extras = new SettingsForm();
+                extras.Show();
+            }
         }
     }
 }

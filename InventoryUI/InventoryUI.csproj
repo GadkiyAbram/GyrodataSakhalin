@@ -46,11 +46,16 @@
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Services" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,11 +67,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiHelpers\ApiConnectorHelper.cs" />
+    <Compile Include="ApiHelpers\ImageClass.cs" />
     <Compile Include="FormsUI\BatteryUIs\AddNewBatteryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormsUI\BatteryUIs\AddNewBatteryForm.Designer.cs">
       <DependentUpon>AddNewBatteryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsUI\BatteryUIs\EditBatteryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsUI\BatteryUIs\EditBatteryForm.Designer.cs">
+      <DependentUpon>EditBatteryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsUI\SettingsUI\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsUI\SettingsUI\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsUI\ItemsUIs\AddNewItemForm.cs">
       <SubType>Form</SubType>
@@ -123,9 +142,25 @@
       <DependentUpon>LithiumBatteriesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="progressBarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="progressBarForm.Designer.cs">
+      <DependentUpon>progressBarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\BatteryValidation.cs" />
+    <Compile Include="Validation\ItemValidation.cs" />
+    <Compile Include="Validation\JobValidation.cs" />
+    <Compile Include="Validation\UnitValidationRegex.cs" />
     <EmbeddedResource Include="FormsUI\BatteryUIs\AddNewBatteryForm.resx">
       <DependentUpon>AddNewBatteryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsUI\BatteryUIs\EditBatteryForm.resx">
+      <DependentUpon>EditBatteryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsUI\SettingsUI\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsUI\ItemsUIs\AddNewItemForm.resx">
       <DependentUpon>AddNewItemForm.cs</DependentUpon>
@@ -154,6 +189,9 @@
     <EmbeddedResource Include="FormsUI\BatteryUIs\LithiumBatteriesForm.resx">
       <DependentUpon>LithiumBatteriesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="progressBarForm.resx">
+      <DependentUpon>progressBarForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -175,7 +213,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InventoryLibrary\InventoryLibrary.csproj">

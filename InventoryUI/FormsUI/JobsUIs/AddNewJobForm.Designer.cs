@@ -95,6 +95,7 @@
             this.jobMaxTemperatureText.Name = "jobMaxTemperatureText";
             this.jobMaxTemperatureText.Size = new System.Drawing.Size(160, 22);
             this.jobMaxTemperatureText.TabIndex = 42;
+            this.jobMaxTemperatureText.Text = "0";
             // 
             // maxTempLabel
             // 
@@ -121,6 +122,7 @@
             this.jobCirculationHoursText.Name = "jobCirculationHoursText";
             this.jobCirculationHoursText.Size = new System.Drawing.Size(160, 22);
             this.jobCirculationHoursText.TabIndex = 38;
+            this.jobCirculationHoursText.Text = "0";
             // 
             // circulationHrsLabel
             // 

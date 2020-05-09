@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.AddingNewItemToolLabel = new System.Windows.Forms.Label();
+            this.addBatteryLabel = new System.Windows.Forms.Label();
             this.addBatteryButton = new System.Windows.Forms.Button();
             this.batteryCommentText = new System.Windows.Forms.TextBox();
             this.commentLabel = new System.Windows.Forms.Label();
@@ -54,16 +54,16 @@
             this.conditionComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // AddingNewItemToolLabel
+            // addBatteryLabel
             // 
-            this.AddingNewItemToolLabel.AutoSize = true;
-            this.AddingNewItemToolLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddingNewItemToolLabel.Location = new System.Drawing.Point(18, 15);
-            this.AddingNewItemToolLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.AddingNewItemToolLabel.Name = "AddingNewItemToolLabel";
-            this.AddingNewItemToolLabel.Size = new System.Drawing.Size(212, 25);
-            this.AddingNewItemToolLabel.TabIndex = 24;
-            this.AddingNewItemToolLabel.Text = "Adding New Item / Tool";
+            this.addBatteryLabel.AutoSize = true;
+            this.addBatteryLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBatteryLabel.Location = new System.Drawing.Point(13, 9);
+            this.addBatteryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.addBatteryLabel.Name = "addBatteryLabel";
+            this.addBatteryLabel.Size = new System.Drawing.Size(180, 25);
+            this.addBatteryLabel.TabIndex = 24;
+            this.addBatteryLabel.Text = "Adding New Battery";
             // 
             // addBatteryButton
             // 
@@ -71,7 +71,7 @@
             this.addBatteryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBatteryButton.Location = new System.Drawing.Point(12, 375);
             this.addBatteryButton.Name = "addBatteryButton";
-            this.addBatteryButton.Size = new System.Drawing.Size(267, 39);
+            this.addBatteryButton.Size = new System.Drawing.Size(278, 39);
             this.addBatteryButton.TabIndex = 47;
             this.addBatteryButton.Text = "ADD BATTERY";
             this.addBatteryButton.UseVisualStyleBackColor = false;
@@ -80,9 +80,9 @@
             // batteryCommentText
             // 
             this.batteryCommentText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryCommentText.Location = new System.Drawing.Point(119, 330);
+            this.batteryCommentText.Location = new System.Drawing.Point(130, 330);
             this.batteryCommentText.Name = "batteryCommentText";
-            this.batteryCommentText.Size = new System.Drawing.Size(160, 22);
+            this.batteryCommentText.Size = new System.Drawing.Size(162, 22);
             this.batteryCommentText.TabIndex = 46;
             // 
             // commentLabel
@@ -97,10 +97,12 @@
             // batteryContainerText
             // 
             this.batteryContainerText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryContainerText.Location = new System.Drawing.Point(119, 302);
+            this.batteryContainerText.Location = new System.Drawing.Point(130, 302);
             this.batteryContainerText.Name = "batteryContainerText";
-            this.batteryContainerText.Size = new System.Drawing.Size(160, 22);
+            this.batteryContainerText.Size = new System.Drawing.Size(162, 22);
             this.batteryContainerText.TabIndex = 44;
+            this.batteryContainerText.Text = "GYLS-001";
+            this.batteryContainerText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // containerLabel
             // 
@@ -114,10 +116,11 @@
             // batteryArrivedText
             // 
             this.batteryArrivedText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryArrivedText.Location = new System.Drawing.Point(119, 274);
+            this.batteryArrivedText.Location = new System.Drawing.Point(130, 273);
             this.batteryArrivedText.Name = "batteryArrivedText";
-            this.batteryArrivedText.Size = new System.Drawing.Size(160, 22);
+            this.batteryArrivedText.Size = new System.Drawing.Size(162, 22);
             this.batteryArrivedText.TabIndex = 42;
+            this.batteryArrivedText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // arrivedLabel
             // 
@@ -131,10 +134,11 @@
             // batteryStatusText
             // 
             this.batteryStatusText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryStatusText.Location = new System.Drawing.Point(119, 246);
+            this.batteryStatusText.Location = new System.Drawing.Point(130, 245);
             this.batteryStatusText.Name = "batteryStatusText";
-            this.batteryStatusText.Size = new System.Drawing.Size(160, 22);
+            this.batteryStatusText.Size = new System.Drawing.Size(162, 22);
             this.batteryStatusText.TabIndex = 40;
+            this.batteryStatusText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // statusLabel
             // 
@@ -148,10 +152,11 @@
             // batteryInvoiceText
             // 
             this.batteryInvoiceText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryInvoiceText.Location = new System.Drawing.Point(119, 218);
+            this.batteryInvoiceText.Location = new System.Drawing.Point(130, 217);
             this.batteryInvoiceText.Name = "batteryInvoiceText";
-            this.batteryInvoiceText.Size = new System.Drawing.Size(160, 22);
+            this.batteryInvoiceText.Size = new System.Drawing.Size(162, 22);
             this.batteryInvoiceText.TabIndex = 38;
+            this.batteryInvoiceText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // invoiceLabel
             // 
@@ -165,10 +170,11 @@
             // batteryCcdText
             // 
             this.batteryCcdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryCcdText.Location = new System.Drawing.Point(119, 190);
+            this.batteryCcdText.Location = new System.Drawing.Point(130, 189);
             this.batteryCcdText.Name = "batteryCcdText";
-            this.batteryCcdText.Size = new System.Drawing.Size(160, 22);
+            this.batteryCcdText.Size = new System.Drawing.Size(162, 22);
             this.batteryCcdText.TabIndex = 36;
+            this.batteryCcdText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ccdLabel
             // 
@@ -181,11 +187,15 @@
             // 
             // batterySerialThreeText
             // 
+            this.batterySerialThreeText.BackColor = System.Drawing.Color.White;
             this.batterySerialThreeText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batterySerialThreeText.Location = new System.Drawing.Point(119, 162);
+            this.batterySerialThreeText.Enabled = false;
+            this.batterySerialThreeText.Location = new System.Drawing.Point(130, 161);
             this.batterySerialThreeText.Name = "batterySerialThreeText";
-            this.batterySerialThreeText.Size = new System.Drawing.Size(160, 22);
+            this.batterySerialThreeText.Size = new System.Drawing.Size(162, 22);
             this.batterySerialThreeText.TabIndex = 34;
+            this.batterySerialThreeText.Text = "N/A";
+            this.batterySerialThreeText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // serialThrLabel
             // 
@@ -198,11 +208,15 @@
             // 
             // batterySerialTwoText
             // 
+            this.batterySerialTwoText.BackColor = System.Drawing.Color.White;
             this.batterySerialTwoText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batterySerialTwoText.Location = new System.Drawing.Point(119, 134);
+            this.batterySerialTwoText.Enabled = false;
+            this.batterySerialTwoText.Location = new System.Drawing.Point(130, 133);
             this.batterySerialTwoText.Name = "batterySerialTwoText";
-            this.batterySerialTwoText.Size = new System.Drawing.Size(160, 22);
+            this.batterySerialTwoText.Size = new System.Drawing.Size(162, 22);
             this.batterySerialTwoText.TabIndex = 32;
+            this.batterySerialTwoText.Text = "N/A";
+            this.batterySerialTwoText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // serialTwoLabel
             // 
@@ -216,10 +230,11 @@
             // batterySerialOneText
             // 
             this.batterySerialOneText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batterySerialOneText.Location = new System.Drawing.Point(119, 106);
+            this.batterySerialOneText.Location = new System.Drawing.Point(130, 106);
             this.batterySerialOneText.Name = "batterySerialOneText";
             this.batterySerialOneText.Size = new System.Drawing.Size(160, 22);
             this.batterySerialOneText.TabIndex = 30;
+            this.batterySerialOneText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // serialOneLabel
             // 
@@ -242,10 +257,11 @@
             // batteryBoxNumberText
             // 
             this.batteryBoxNumberText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.batteryBoxNumberText.Location = new System.Drawing.Point(119, 50);
+            this.batteryBoxNumberText.Location = new System.Drawing.Point(130, 50);
             this.batteryBoxNumberText.Name = "batteryBoxNumberText";
-            this.batteryBoxNumberText.Size = new System.Drawing.Size(160, 22);
+            this.batteryBoxNumberText.Size = new System.Drawing.Size(162, 22);
             this.batteryBoxNumberText.TabIndex = 26;
+            this.batteryBoxNumberText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // boxNumberLabel
             // 
@@ -263,16 +279,16 @@
             this.conditionComboBox.Items.AddRange(new object[] {
             "New",
             "Used"});
-            this.conditionComboBox.Location = new System.Drawing.Point(119, 76);
+            this.conditionComboBox.Location = new System.Drawing.Point(130, 78);
             this.conditionComboBox.Name = "conditionComboBox";
-            this.conditionComboBox.Size = new System.Drawing.Size(160, 25);
+            this.conditionComboBox.Size = new System.Drawing.Size(162, 25);
             this.conditionComboBox.TabIndex = 48;
             // 
             // AddNewBatteryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 422);
+            this.ClientSize = new System.Drawing.Size(302, 422);
             this.Controls.Add(this.conditionComboBox);
             this.Controls.Add(this.addBatteryButton);
             this.Controls.Add(this.batteryCommentText);
@@ -296,7 +312,7 @@
             this.Controls.Add(this.conditionLabel);
             this.Controls.Add(this.batteryBoxNumberText);
             this.Controls.Add(this.boxNumberLabel);
-            this.Controls.Add(this.AddingNewItemToolLabel);
+            this.Controls.Add(this.addBatteryLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.DimGray;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -308,7 +324,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label AddingNewItemToolLabel;
+        private System.Windows.Forms.Label addBatteryLabel;
         private System.Windows.Forms.Button addBatteryButton;
         private System.Windows.Forms.TextBox batteryCommentText;
         private System.Windows.Forms.Label commentLabel;

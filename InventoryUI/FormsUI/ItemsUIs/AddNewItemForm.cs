@@ -1,12 +1,16 @@
 ﻿using InventoryLibrary;
 using InventoryLibrary.Extras;
 using InventoryLibrary.Validation.ToolValidation;
+using InventoryUI.ApiHelpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +19,10 @@ namespace InventoryUI
 {
     public partial class AddNewItemForm : Form
     {
+        // TODO - refactor path accordingly
+        string pathItemsAdd = "PathItemsAdd";
+        string pathItemsAddWithImage = "PathItemsAddWithImage";
+        string imgLocation = "";
         public List<string> errorsItem = new List<string>();
 
         public AddNewItemForm()
@@ -27,6 +35,9 @@ namespace InventoryUI
 
         private void addItemButton_Click(object sender, EventArgs e)
         {
+            string convertedImage = ImageClass.prepareImageToString(imgLocation);
+
+            int result = 0;
             if (ValidateForm())
             {
                 ItemModel model = new ItemModel(
@@ -42,14 +53,21 @@ namespace InventoryUI
                 itemStatusText.Text,        // check length
                 itemBoxText.Text,           // check length
                 itemContainerText.Text,     // check length
-                itemCommentText.Text        // check length
+                itemCommentText.Text,           // check length
+                convertedImage
                 );
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
+                //MessageBox.Show(BitConverter.ToString(model.ItemImage).Replace("-", ""));
+                result = ApiHelpers.ApiConnectorHelper.SaveData<ItemModel>(model, pathItemsAdd);
+                if (result != 0)
                 {
-                    db.CreateItem(model);
+                    MessageBox.Show($"{ itemItemText.Text } { itemAssetText.Text } added");
                 }
-                MessageBox.Show($"Item { itemItemText.Text } added");
+                else
+                {
+                    MessageBox.Show("Smth went wrong");
+                }
+
             }
             else
             {
@@ -65,11 +83,11 @@ namespace InventoryUI
             errorsItem.Clear();
 
             // Item validation - check if exists one already
-            if (SqlConnector.CheckIfItemExists(itemItemText.Text, itemAssetText.Text).Count != 0)
-            {
-                output = false;
-                errorsItem.Add($"{ itemItemText.Text } { itemAssetText.Text } already exists");
-            }
+            //if (SqlConnector.CheckIfItemExists(itemItemText.Text, itemAssetText.Text).Count != 0)
+            //{
+            //    output = false;
+            //    errorsItem.Add($"{ itemItemText.Text } { itemAssetText.Text } already exists");
+            //}
             
             // asset validation
             if (itemAssetText.Text.Length > 20)
@@ -156,6 +174,17 @@ namespace InventoryUI
             }
 
             return output;
+        }
+
+        private void browseImageButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "jpg files(*.jpg)|*jpg|png files(*.png)|*.png|All files(*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                imgLocation = dialog.FileName.ToString();
+                itemPictureBox.ImageLocation = imgLocation;
+            }
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditItemForm));
             this.editItemButton = new System.Windows.Forms.Button();
             this.editItemCommentText = new System.Windows.Forms.TextBox();
             this.editItemCommentLabel = new System.Windows.Forms.Label();
@@ -56,13 +57,18 @@
             this.editItemNameRusText = new System.Windows.Forms.RichTextBox();
             this.circulationHrsLabel = new System.Windows.Forms.Label();
             this.editItemCirculationText = new System.Windows.Forms.TextBox();
+            this.panelEditItem = new System.Windows.Forms.Panel();
+            this.pictureBoxEditItem = new System.Windows.Forms.PictureBox();
+            this.browseImageButton = new System.Windows.Forms.Button();
+            this.panelEditItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditItem)).BeginInit();
             this.SuspendLayout();
             // 
             // editItemButton
             // 
             this.editItemButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.editItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editItemButton.Location = new System.Drawing.Point(14, 371);
+            this.editItemButton.Location = new System.Drawing.Point(12, 354);
             this.editItemButton.Name = "editItemButton";
             this.editItemButton.Size = new System.Drawing.Size(627, 39);
             this.editItemButton.TabIndex = 47;
@@ -134,7 +140,7 @@
             this.editItemStatusLabel.AutoSize = true;
             this.editItemStatusLabel.Location = new System.Drawing.Point(13, 242);
             this.editItemStatusLabel.Name = "editItemStatusLabel";
-            this.editItemStatusLabel.Size = new System.Drawing.Size(53, 21);
+            this.editItemStatusLabel.Size = new System.Drawing.Size(52, 21);
             this.editItemStatusLabel.TabIndex = 39;
             this.editItemStatusLabel.Text = "Status";
             // 
@@ -151,7 +157,7 @@
             this.editItemPositionCcdLabel.AutoSize = true;
             this.editItemPositionCcdLabel.Location = new System.Drawing.Point(13, 214);
             this.editItemPositionCcdLabel.Name = "editItemPositionCcdLabel";
-            this.editItemPositionCcdLabel.Size = new System.Drawing.Size(101, 21);
+            this.editItemPositionCcdLabel.Size = new System.Drawing.Size(100, 21);
             this.editItemPositionCcdLabel.TabIndex = 37;
             this.editItemPositionCcdLabel.Text = "Position CCD";
             // 
@@ -257,7 +263,7 @@
             this.AddingNewItemToolLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddingNewItemToolLabel.Location = new System.Drawing.Point(12, 9);
             this.AddingNewItemToolLabel.Name = "AddingNewItemToolLabel";
-            this.AddingNewItemToolLabel.Size = new System.Drawing.Size(140, 25);
+            this.AddingNewItemToolLabel.Size = new System.Drawing.Size(138, 25);
             this.AddingNewItemToolLabel.TabIndex = 24;
             this.AddingNewItemToolLabel.Text = "Edit Item / Tool";
             // 
@@ -304,16 +310,51 @@
             // editItemCirculationText
             // 
             this.editItemCirculationText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editItemCirculationText.Enabled = false;
             this.editItemCirculationText.Location = new System.Drawing.Point(121, 186);
             this.editItemCirculationText.Name = "editItemCirculationText";
             this.editItemCirculationText.Size = new System.Drawing.Size(160, 22);
             this.editItemCirculationText.TabIndex = 131;
             // 
+            // panelEditItem
+            // 
+            this.panelEditItem.AutoScroll = true;
+            this.panelEditItem.Controls.Add(this.pictureBoxEditItem);
+            this.panelEditItem.Location = new System.Drawing.Point(298, 187);
+            this.panelEditItem.Name = "panelEditItem";
+            this.panelEditItem.Size = new System.Drawing.Size(342, 161);
+            this.panelEditItem.TabIndex = 132;
+            // 
+            // pictureBoxEditItem
+            // 
+            this.pictureBoxEditItem.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxEditItem.Image")));
+            this.pictureBoxEditItem.Location = new System.Drawing.Point(5, 3);
+            this.pictureBoxEditItem.Name = "pictureBoxEditItem";
+            this.pictureBoxEditItem.Size = new System.Drawing.Size(311, 183);
+            this.pictureBoxEditItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxEditItem.TabIndex = 0;
+            this.pictureBoxEditItem.TabStop = false;
+            // 
+            // browseImageButton
+            // 
+            this.browseImageButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.browseImageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.browseImageButton.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.browseImageButton.Location = new System.Drawing.Point(298, 154);
+            this.browseImageButton.Name = "browseImageButton";
+            this.browseImageButton.Size = new System.Drawing.Size(87, 25);
+            this.browseImageButton.TabIndex = 133;
+            this.browseImageButton.Text = "BROWSE";
+            this.browseImageButton.UseVisualStyleBackColor = false;
+            this.browseImageButton.Click += new System.EventHandler(this.browseImageButton_Click);
+            // 
             // EditItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 421);
+            this.ClientSize = new System.Drawing.Size(653, 402);
+            this.Controls.Add(this.browseImageButton);
+            this.Controls.Add(this.panelEditItem);
             this.Controls.Add(this.editItemCirculationText);
             this.Controls.Add(this.circulationHrsLabel);
             this.Controls.Add(this.editItemNameRusText);
@@ -346,6 +387,9 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "EditItemForm";
             this.Text = "Edit Item";
+            this.panelEditItem.ResumeLayout(false);
+            this.panelEditItem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,5 +425,8 @@
         private System.Windows.Forms.RichTextBox editItemNameRusText;
         private System.Windows.Forms.Label circulationHrsLabel;
         private System.Windows.Forms.TextBox editItemCirculationText;
+        private System.Windows.Forms.Panel panelEditItem;
+        private System.Windows.Forms.PictureBox pictureBoxEditItem;
+        private System.Windows.Forms.Button browseImageButton;
     }
 }

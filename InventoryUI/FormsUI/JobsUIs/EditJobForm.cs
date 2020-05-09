@@ -1,20 +1,16 @@
 ﻿using InventoryLibrary;
-using InventoryLibrary.Validation.ToolValidation;
+using InventoryUI.Validation.JobValidation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryUI.FormsUI.JobsUIs
 {
     public partial class EditJobForm : Form
     {
+        string pathJobsEdit = "PathJobsEdit";
+        string pathJobSelected = "PathJobSelected";
         List<string> errorsEditJob = new List<string>();
         // TODO - refactor oldJobCIrculation
         float oldJobCircultaionHours = 0;
@@ -29,15 +25,16 @@ namespace InventoryUI.FormsUI.JobsUIs
         private void LoadAllJobsToComboBox(List<JobModel> jobList)
         {
             // TODO - check if the jobList is NULL
-            foreach (var job in jobList)
+            if (jobList.Count() != 0)
             {
-                selectJobComboBox.Items.Add(job.JobNumber);
+                foreach (var job in jobList)
+                {
+                    selectJobComboBox.Items.Add(job.JobNumber);
+                }
+                selectJobComboBox.SelectedIndex = 0;
             }
-            selectJobComboBox.SelectedIndex = 0;
-
         }
 
-        // TODO - Complete editing job using ComboBox
         private void selectJobComboBox_SelectedIndexChanged(object sender, EventArgs exception)
         {
             LoadFormWithJobFromComboBox(selectJobComboBox.Text);
@@ -47,16 +44,15 @@ namespace InventoryUI.FormsUI.JobsUIs
         {
             try
             {
-                JobModel jobModel = SqlConnector.GetSelectedJob(selectedJob).First();
+                JobModel jobModel = ApiHelpers.ApiConnectorHelper.GetSelectedJobData<JobModel>(selectedJob, pathJobSelected).First();
                 job_id = jobModel.Id;
 
                 oldJobCircultaionHours = jobModel.CirculationHours;
-                // TODO - Complete displaying Job data
 
                 editJobLabel.Text = jobModel.JobNumber;
                 editJobNumberText.Text = jobModel.JobNumber;
                 editJobClientText.Text = jobModel.ClientName;
-                editJobGdpText.Text = jobModel.Gdp;
+                editJobGdpText.Text = jobModel.GDP;
                 editJobModemText.Text = jobModel.Modem;
                 editJobModemVersionText.Text = jobModel.ModemVersion;
                 editJobBbpText.Text = jobModel.Bullplug;
@@ -66,10 +62,10 @@ namespace InventoryUI.FormsUI.JobsUIs
 
                 editJobEngOneText.Text = jobModel.EngineerOne;
                 editJobEngTwoText.Text = jobModel.EngineerTwo;
-                editJobEng1ArrivedText.Text = jobModel.EngineerOneArrived;
-                editJobEng2ArrivedText.Text = jobModel.EngineerTwoArrived;
-                editJobEng1LeftText.Text = jobModel.EngineerOneLeft;
-                editJobEng2LeftText.Text = jobModel.EngineerTwoLeft;
+                editJobEng1ArrivedText.Text = jobModel.eng_one_arrived;
+                editJobEng2ArrivedText.Text = jobModel.eng_two_arrived;
+                editJobEng1LeftText.Text = jobModel.eng_one_left;
+                editJobEng2LeftText.Text = jobModel.eng_two_left;
 
                 editJobContainerText.Text = jobModel.Container;
                 editJobContArrivedText.Text = jobModel.ContainerArrived;
@@ -88,14 +84,10 @@ namespace InventoryUI.FormsUI.JobsUIs
 
         private void editJobButton_Click(object sender, EventArgs e)
         {
-            if (ValidateEditJob())
+            float jobCirculationTime = float.Parse(editJobCirculationHoursText.Text);
+            int result = 0;
+            if (ValidateForm().Keys.First())
             {
-                float circul = 0;
-                float maxTemp = 0;
-
-                if (editJobCirculationHoursText.Text.Length != 0) { circul = float.Parse(editJobCirculationHoursText.Text); }
-                if (editJobMaxTemperatureText.Text.Length != 0) { maxTemp = float.Parse(editJobMaxTemperatureText.Text); }
-
                 JobModel model = new JobModel(
                     editJobNumberText.Text,
                     editJobClientText.Text,
@@ -103,11 +95,9 @@ namespace InventoryUI.FormsUI.JobsUIs
                     editJobModemText.Text,
                     editJobModemVersionText.Text,
                     editJobBbpText.Text,
-                    circul,
-                    //editJobCirculationHoursText.Text,                             // check length, float
+                    jobCirculationTime,
                     editJobBatteryText.Text,
-                    maxTemp,
-                    //editJobMaxTemperatureText.Text,                            // check length, float
+                    editJobMaxTemperatureText.Text,                            // check length, float
                     editJobEngOneText.Text,
                     editJobEngTwoText.Text,
                     editJobEng1ArrivedText.Text,        // length, check date
@@ -122,115 +112,40 @@ namespace InventoryUI.FormsUI.JobsUIs
                     editJobCommentText.Text
                     );
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.UpdateJob(job_id, model, oldJobCircultaionHours);
-                }
-                MessageBox.Show($"Job { model.JobNumber } corrected");
+                ApiHelpers.ApiConnectorHelper.EditData<JobModel>(job_id.ToString(), model, pathJobsEdit);
+
+                //foreach (IDataConnection db in GlobalConfig.Connections)
+                //{
+                //    db.UpdateJob(job_id, model, oldJobCircultaionHours);
+                //}
+                //if (result != 0)
+                //{
+                //    MessageBox.Show($"Job { model.JobNumber } corrected");
+                //}
             }
             else
             {
-                ErrorForm errorForm = new ErrorForm(errorsEditJob);
+                ErrorForm errorForm = new ErrorForm(ValidateForm().Values.First());
                 errorForm.Show();
             }
         }
 
-        private bool ValidateEditJob()
+        private Dictionary<bool, List<string>> ValidateForm()
         {
-            bool output = true;
-            errorsEditJob.Clear();
+            Dictionary<string, string> jobFields = new Dictionary<string, string>();
+            //jobFields.Add("jobJobNumber", editJobNumberText.Text);
+            jobFields.Add("jobCirculation", editJobCirculationHoursText.Text);
+            jobFields.Add("jobMaxTemperature", editJobMaxTemperatureText.Text);
+            jobFields.Add("engOneArrived", editJobEng1ArrivedText.Text);
+            jobFields.Add("engTwoArrived", editJobEng2ArrivedText.Text);
+            jobFields.Add("engOneLeft", editJobEng1LeftText.Text);
+            jobFields.Add("engTwoLeft", editJobEng2LeftText.Text);
+            jobFields.Add("jobContainer", editJobContainerText.Text);
+            jobFields.Add("containerArrived", editJobContArrivedText.Text);
+            jobFields.Add("containerLeft", editJobContLeftText.Text);
+            jobFields.Add("jobRig", editJobRigText.Text);
 
-            // ModemVersion validating
-            //if (editJobModemText.Text.Length != 0)
-            //{
-            //    output = false;
-            //    errorsEditJob.Add("Modem Version is empty");
-            //}
-
-            // Circulation validating
-            if (editJobCirculationHoursText.Text.Length != 0)
-            {
-                float circulation = 0;
-                bool ValidateCirculation = float.TryParse(editJobCirculationHoursText.Text, out circulation);
-                if (!ValidateCirculation)
-                {
-                    output = false;
-                    errorsEditJob.Add("Wrong Circulation value");
-                }
-            }
-
-            // MaxTemperature validating
-            if (editJobMaxTemperatureText.Text.Length != 0)
-            {
-                float maxTemperature = 0;
-                bool ValidateMaxTemperature = float.TryParse(editJobMaxTemperatureText.Text, out maxTemperature);
-                if (!ValidateMaxTemperature)
-                {
-                    output = false;
-                    errorsEditJob.Add("Wrong Max Temperature value");
-                }
-            }
-            
-            // Dates validating
-            DateValidation dateEng1ArrivedValidation = new DateValidation(editJobEng1ArrivedText.Text);
-            if (editJobEng1ArrivedText.Text.Length > 0)
-            {
-                if (!dateEng1ArrivedValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Arrived Eng1 Date invalid");
-                }
-            }
-
-            DateValidation dateEng2ArrivedValidation = new DateValidation(editJobEng2ArrivedText.Text);
-            if (editJobEng2ArrivedText.Text.Length > 0)
-            {
-                if (!dateEng2ArrivedValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Arrived Eng2 Date invalid");
-                }
-            }
-
-            DateValidation dateEng1LeftValidation = new DateValidation(editJobEng1LeftText.Text);
-            if (editJobEng1LeftText.Text.Length > 0)
-            {
-                if (!dateEng1LeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Left Eng1 Date invalid");
-                }
-            }
-
-            DateValidation dateEng2LeftValidation = new DateValidation(editJobEng2LeftText.Text);
-            if (editJobEng2LeftText.Text.Length > 0)
-            {
-                if (!dateEng2LeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Left Eng2 Date invalid");
-                }
-            }
-
-            DateValidation dateContainerArrValidation = new DateValidation(editJobContArrivedText.Text);
-            if (editJobContArrivedText.Text.Length > 0)
-            {
-                if (!dateContainerArrValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Container Arrived Date invalid");
-                }
-            }
-
-            DateValidation dateContainerLeftValidation = new DateValidation(editJobContLeftText.Text);
-            if (editJobContLeftText.Text.Length > 0)
-            {
-                if (!dateContainerLeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsEditJob.Add("Container Left Date invalid");
-                }
-            }
+            var output = JobValidation.ValidateJob(jobFields);
 
             return output;
         }

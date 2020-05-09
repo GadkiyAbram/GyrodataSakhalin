@@ -1,21 +1,23 @@
 ﻿using InventoryLibrary;
 using System;
 using System.Collections.Generic;
-using InventoryLibrary.Validation.JobValidation;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using InventoryLibrary.Validation.ToolValidation;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+using InventoryUI.ApiHelpers;
+using InventoryLibrary.Validation.JobValidation;
+using InventoryUI.Validation.JobValidation;
 
 namespace InventoryUI.FormsUI.JobsUIs
 {
     public partial class AddNewJobForm : Form
     {
+        string PathJobsAdd = "PathJobsAdd";
+        string PathJobSelected = "PathJobSelected";
         public List<string> errorsAddJob = new List<string>();
 
         public AddNewJobForm()
@@ -25,58 +27,64 @@ namespace InventoryUI.FormsUI.JobsUIs
             jobIssuesComboBox.SelectedIndex = 0;
         }
 
+        private Uri UriConnectionForJobCreate()
+        {
+            UriBuilder uriBuilder = new UriBuilder();
+            uriBuilder.Scheme = "http";
+            uriBuilder.Host = Properties.Settings.Default.Host;
+            uriBuilder.Port = Properties.Settings.Default.Port;
+            uriBuilder.Path = System.Configuration.ConfigurationManager.AppSettings["PathDataForJobCreate"];
+
+            return uriBuilder.Uri;
+        }
+
         public void WireUpComboBoxes()
         {
-            LoadAllClientsToComboBox();
-            LoadAllGdpToComboBox();
-            LoadAllModemsToComboBox();
-            LoadAllBbpToComboBox();
-            LoadEngineersToComboBox();
-            LoadBatteriesToComboBox();
-        }
+            List<List<string>> data = null;
+            Uri url = UriConnectionForJobCreate();
 
-        // TODO - refactor comboboxes
-        private void LoadAllClientsToComboBox()
-        {
-            jobClientComboBox.DataSource = SqlConnector.GetClientsData();
-            jobClientComboBox.DisplayMember = "ClientName";
-        }
+            var client = new WebClient();
+            string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
+            client.Headers["Token"] = token;
+            client.Headers.Add("Content-Type", "application/json");
 
-        private void LoadAllGdpToComboBox()
-        {
-            jobGdpComboBox.DataSource = SqlConnector.GetGdpData();
-            jobGdpComboBox.DisplayMember = "Asset";
-        }
-
-        private void LoadAllModemsToComboBox()
-        {
-            jobModemComboBox.DataSource = SqlConnector.GetModemData();
-            jobModemComboBox.DisplayMember = "Asset";
-        }
-
-        private void LoadAllBbpToComboBox()
-        {
-            jobBullPlugComboBox.DataSource = SqlConnector.GetBbpData();
-            jobBullPlugComboBox.DisplayMember = "Asset";
-        }
-
-        private void LoadEngineersToComboBox()
-        {
-            jobEngOneComboBox.DataSource = SqlConnector.GetEngineerData();
-            jobEngTwoComboBox.DataSource = SqlConnector.GetEngineerData();
-            jobEngOneComboBox.DisplayMember = "EngineerName";
-            jobEngTwoComboBox.DisplayMember = "EngineerName";
-            jobEngOneComboBox.SelectedIndex = 8;
-            jobEngTwoComboBox.SelectedIndex = 8;
-        }
-
-        private void LoadBatteriesToComboBox()
-        {
-            List<BatteryModel> batteriesList = SqlConnector.GetBatteriesData();
-            if (batteriesList != null)
+            try
             {
-                jobBatteryComboBox.DataSource = SqlConnector.GetBatteriesData();
-                jobBatteryComboBox.DisplayMember = "SerialOne";
+                var content = client.DownloadString(url);
+
+                if (content != null)
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(List<List<string>>));
+                    using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
+                    {
+                        data = (List<List<string>>)serializer.ReadObject(ms);
+
+                        jobClientComboBox.DataSource = data[0];
+                        jobGdpComboBox.DataSource = data[1];
+                        jobModemComboBox.DataSource = data[2];
+                        jobBullPlugComboBox.DataSource = data[3];
+                        jobBatteryComboBox.DataSource = data[5];
+
+                        //TODO- refactor 
+                        List<string> engsOne = new List<string>(data[4]);
+                        List<string> engsTwo = new List<string>(data[4]);
+
+                        jobEngOneComboBox.DataSource = engsOne;
+                        jobEngOneComboBox.SelectedIndex = 8;
+                        jobEngTwoComboBox.DataSource = engsTwo;
+                        jobEngTwoComboBox.SelectedIndex = 8;
+
+                        //old version
+                        //jobEngOneComboBox.DataSource = data[4];
+                        //jobEngOneComboBox.SelectedIndex = 8;
+                        //jobEngTwoComboBox.DataSource = data[4];
+                        //jobEngTwoComboBox.SelectedIndex = 8;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -94,11 +102,13 @@ namespace InventoryUI.FormsUI.JobsUIs
         private void addJobButton_Click(object sender, EventArgs e)
         {
             string jobCirculationTime = jobCirculationHoursText.Text;
-            string jobMaxTemperature = jobMaxTemperatureText.Text;
+            //string jobMaxTemperature = jobMaxTemperatureText.Text;
+            int result = 0;
+            //var jobExists = ApiConnectorHelper.GetSelectedJobData<JobModel>(jobNumberText.Text, PathJobSelected).First();
 
-            if (ValidateForm())
+            if (ValidateForm().Keys.First())
             {
-                JobModel jobModel = new JobModel(
+                JobModel model = new JobModel(
                         jobNumberText.Text,
                         jobClientComboBox.Text,
                         jobGdpComboBox.Text,
@@ -106,10 +116,8 @@ namespace InventoryUI.FormsUI.JobsUIs
                         jobModemVersionText.Text,
                         jobBullPlugComboBox.Text,
                         CalculateFloatData(jobCirculationTime),
-                        //jobCirculationHoursText.Text,
                         jobBatteryComboBox.Text,
-                        CalculateFloatData(jobMaxTemperature),
-                        //jobMaxTemperatureText.Text,
+                        jobMaxTemperatureText.Text,
                         jobEngOneComboBox.Text,
                         jobEngTwoComboBox.Text,
                         jobEng1ArrivedText.Text,
@@ -124,143 +132,39 @@ namespace InventoryUI.FormsUI.JobsUIs
                         jobCommentText.Text
                         );
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
+                result = ApiConnectorHelper.SaveData<JobModel>(model, PathJobsAdd);
+                if (result != 0)
                 {
-                    db.CreateJob(jobModel);
+                    addJobButton.Text = $"Job { jobNumberText.Text } added";
                 }
-                //MessageBox.Show($"Job { jobNumberText.Text } added");
-                addJobButton.Text = $"Job { jobNumberText.Text } added";
+                else
+                {
+                    addJobButton.Text = "Smth went wrong";
+                }
             }
             else
             {
-                ErrorForm errorForm = new ErrorForm(errorsAddJob);
+                ErrorForm errorForm = new ErrorForm(ValidateForm().Values.First());
                 errorForm.Show();
             }
         }
 
-        // TODO - Complete Job's validation
-        private bool ValidateForm()
+        private Dictionary<bool, List<string>> ValidateForm()
         {
-            // Clear errorAddJob List to renew errors if they come up
-            errorsAddJob.Clear();
-            // TODO - check if Item already exists
-            bool output = true;
-            errorsAddJob.Clear();
+            Dictionary<string, string> jobFields = new Dictionary<string, string>();
+            jobFields.Add("jobJobNumber", jobNumberText.Text);
+            jobFields.Add("jobCirculation", jobCirculationHoursText.Text);
+            jobFields.Add("jobMaxTemperature", jobMaxTemperatureText.Text);
+            jobFields.Add("engOneArrived", jobEng1ArrivedText.Text);
+            jobFields.Add("engTwoArrived", jobEng2ArrivedText.Text);
+            jobFields.Add("engOneLeft", jobEng1LeftText.Text);
+            jobFields.Add("engTwoLeft", jobEng2LeftText.Text);
+            jobFields.Add("jobContainer", jobContainerText.Text);
+            jobFields.Add("containerArrived", jobContArrivedText.Text);
+            jobFields.Add("containerLeft", jobContLeftText.Text);
+            jobFields.Add("jobRig", jobRigText.Text);
 
-            // JobNumber validation
-            JobNumberValidation jobValidation = new JobNumberValidation(jobNumberText.Text);
-            if (jobNumberText.Text == null)
-            {
-                output = false;
-                errorsAddJob.Add("Job Number couldn't be empty");
-            }
-            if (jobNumberText.Text.Length > 12)
-            {
-                output = false;
-                errorsAddJob.Add("Job Number Length should be <= 12");
-            }
-            if (!jobValidation.ValidateItem())
-            {
-                output = false;
-                errorsAddJob.Add("Wrong Job Number pattern");
-            }
-
-            // Circulation validating
-            if (jobCirculationHoursText.Text.Length != 0)
-            {
-                float circulation = 0;
-                bool ValidateCirculation = float.TryParse(jobCirculationHoursText.Text, out circulation);
-                if (!ValidateCirculation)
-                {
-                    output = false;
-                    errorsAddJob.Add("Wrong Circulation value");
-                }
-            }
-
-            // Enginners validation. Not one to be selected as both engs
-            // N/A COULD BE selected for both
-            if (jobEngOneComboBox.SelectedIndex != 8 && jobEngTwoComboBox.SelectedIndex != 8)
-            {
-                if (jobEngOneComboBox.Text == jobEngTwoComboBox.Text)
-                {
-                    output = false;
-                    errorsAddJob.Add("One Engineer can not be selected as both");
-                }
-            }
-            
-
-            // MaxTemperature validating
-            if (jobMaxTemperatureText.Text.Length != 0)
-            {
-                float maxTemperature = 0;
-                bool ValidateMaxTemperature = float.TryParse(jobMaxTemperatureText.Text, out maxTemperature);
-                if (!ValidateMaxTemperature)
-                {
-                    output = false;
-                    errorsAddJob.Add("Wrong Max Temperature value");
-                }
-            }
-
-            // Dates validating, Engs Arrvied / Left, Container Arr / Left
-            DateValidation dateEng1ArrivedValidation = new DateValidation(jobEng1ArrivedText.Text);
-            if (jobEng1ArrivedText.Text.Length > 0)
-            {
-                if (!dateEng1ArrivedValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Arrived Eng1 Date invalid");
-                }
-            }
-
-            DateValidation dateEng2ArrivedValidation = new DateValidation(jobEng2ArrivedText.Text);
-            if (jobEng2ArrivedText.Text.Length > 0)
-            {
-                if (!dateEng2ArrivedValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Arrived Eng2 Date invalid");
-                }
-            }
-
-            DateValidation dateEng1LeftValidation = new DateValidation(jobEng1LeftText.Text);
-            if (jobEng1LeftText.Text.Length > 0)
-            {
-                if (!dateEng1LeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Left Eng1 Date invalid");
-                }
-            }
-
-            DateValidation dateEng2LeftValidation = new DateValidation(jobEng2LeftText.Text);
-            if (jobEng2LeftText.Text.Length > 0)
-            {
-                if (!dateEng2LeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Left Eng2 Date invalid");
-                }
-            }
-
-            DateValidation dateContainerArrValidation = new DateValidation(jobContArrivedText.Text);
-            if (jobContArrivedText.Text.Length > 0)
-            {
-                if (!dateContainerArrValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Container Arrived Date invalid");
-                }
-            }
-
-            DateValidation dateContainerLeftValidation = new DateValidation(jobContLeftText.Text);
-            if (jobContLeftText.Text.Length > 0)
-            {
-                if (!dateContainerLeftValidation.ValidateDate())
-                {
-                    output = false;
-                    errorsAddJob.Add("Container Left Date invalid");
-                }
-            }
+            var output = JobValidation.ValidateJob(jobFields);
 
             return output;
         }
@@ -283,7 +187,6 @@ namespace InventoryUI.FormsUI.JobsUIs
             jobCommentText.Text = "";
             addJobButton.Text = "ADD JOB";
 
-            // WireUp ComboBoxes
             WireUpComboBoxes();
         }
     }

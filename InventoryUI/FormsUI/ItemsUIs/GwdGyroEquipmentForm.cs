@@ -1,29 +1,25 @@
 ﻿using InventoryLibrary;
+using InventoryUI.ApiHelpers;
 using InventoryUI.FormsUI.ItemsUIs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Services;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryUI
 {
     public partial class GwdGyroEquipmentForm : Form
     {
+        string pathGwdAll = "PathItemsAll";
+        
+        public static int countItemsInstance = 0;
         List<ItemModel> itemList = new List<ItemModel>();
 
         public GwdGyroEquipmentForm()
         {
             InitializeComponent();
-            GwdGyroCustomItemsLoad("", "");
-            //TODO - remove getallequipment
-            //GwdGyroAllItemsLoad();
+            searchItemComboBox.SelectedIndex = 0;
+            GwdGyroCustomItemsLoad("", "", pathGwdAll);
+            countItemsInstance++;
         }
 
         private void AddNewItemLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -32,47 +28,28 @@ namespace InventoryUI
             addNewItem.Show();
         }
 
-        //TODO - remove getallequipment function
-        private List<ItemModel> GwdGyroAllItemsLoad()
+        private void GwdGyroCustomItemsLoad(string what, string where, string path)
         {
-            return SqlConnector.GetEquipmentData();
-
-        }
-
-        private void GwdGyroCustomItemsLoad(string what, string where)
-        {
-            gwdGyroGridView.DataSource = SqlConnector.GetCustomEquipmentData(what, where);
+            gwdGyroGridView.DataSource = ApiConnectorHelper.DataLoad<ItemModel>(what, where, path);
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            switch (searchItemComboBox.Text)
-            {
-                case "Item":
-                    GwdGyroCustomItemsLoad(searchItemText.Text, "Item");
-                    break;
-                case "Asset":
-                    GwdGyroCustomItemsLoad(searchItemText.Text, "Asset");
-                    break;
-                case "CCD":
-                    GwdGyroCustomItemsLoad(searchItemText.Text, "CCD");
-                    break;
-                case "Invoice":
-                    GwdGyroCustomItemsLoad(searchItemText.Text, "Invoice");
-                    break;
-                case "":
-                    GwdGyroCustomItemsLoad("", "");
-                    //TODO - remove getallequipment
-                    //GwdGyroAllItemsLoad();
-                    break;
-            }
+            string searchItem = searchItemText.Text;
+            string itemComboBox = searchItemComboBox.Text;
+            GwdGyroCustomItemsLoad(searchItem, itemComboBox, pathGwdAll);
         }
 
         private void checkItemLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            itemList = GwdGyroAllItemsLoad();
+            itemList = ApiConnectorHelper.DataLoad<ItemModel>("", "", pathGwdAll);
             EditItemForm editItemForm = new EditItemForm(itemList);
             editItemForm.Show();
+        }
+
+        private void GwdGyroEquipmentForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            countItemsInstance = 0;
         }
     }
 }

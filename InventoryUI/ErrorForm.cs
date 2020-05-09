@@ -12,6 +12,7 @@ namespace InventoryUI
 {
     public partial class ErrorForm : Form
     {
+        // TODO - add Vertical scroll bar
         public ErrorForm(List<string> errors)
         {
             InitializeComponent();

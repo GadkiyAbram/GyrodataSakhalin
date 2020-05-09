@@ -10,7 +10,7 @@ namespace InventoryLibrary.Validation.BatteryValidation
     public class SerialOneValidation
     {
         private string inputString { get; set; }
-        private string pattern = @"^(S1-[0-9]{4})-([0-9]{4})$";
+        private string pattern = @"^(S1-[0-9]{4})-([0-9]{4})$"; // S1-0331-0999
 
         public SerialOneValidation(string itemString)
         {

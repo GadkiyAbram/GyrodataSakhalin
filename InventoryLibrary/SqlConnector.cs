@@ -22,8 +22,8 @@ namespace InventoryLibrary
                 p.Add("@Arrived", model.Arrived);
                 p.Add("@Invoice", model.Invoice);
                 p.Add("@CCD", model.CCD);
-                p.Add("@NameRus", model.NameRussian);
-                p.Add("@PositionCCD", model.PositionInCCD);
+                p.Add("@NameRus", model.NameRus);
+                p.Add("@PositionCCD", model.PositionCCD);
                 p.Add("@ItemStatus", model.ItemStatus);
                 p.Add("@Box", model.Box);
                 p.Add("@Container", model.Container);
@@ -47,10 +47,10 @@ namespace InventoryLibrary
                 p.Add("@BatteryCondition", model.BatteryCondition);
                 p.Add("@SerialOne", model.SerialOne);
                 p.Add("@SerialTwo", model.SerialTwo);
-                p.Add("@SerialThr", model.SerialThree);
+                p.Add("@SerialThr", model.SerialThr);
                 p.Add("@CCD", model.CCD);
                 p.Add("@Invoice", model.Invoice);
-                p.Add("@BatteryStatus", model.Status);
+                p.Add("@BatteryStatus", model.BatteryStatus);
                 p.Add("@Arrived", model.Arrived);
                 p.Add("@Container", model.Container);
                 p.Add("@Comment", model.Comment);
@@ -113,7 +113,7 @@ namespace InventoryLibrary
             {
                 if (connection.State == ConnectionState.Closed) connection.Open();
 
-                return connection.Query<BatteryModel>("spGetAllBatteries", commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<BatteryModel>("spGetAllBatteriesNew", commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
@@ -195,7 +195,7 @@ namespace InventoryLibrary
                 var p = new DynamicParameters();
                 p.Add("@JobNumber", model.JobNumber);
                 p.Add("@Client", model.ClientName);
-                p.Add("@GDPAsset", model.Gdp);
+                p.Add("@GDPAsset", model.GDP);
                 p.Add("@ModemAsset", model.Modem);
                 p.Add("@ModemVersion", model.ModemVersion);
                 p.Add("@BullplugAsset", model.Bullplug);
@@ -204,10 +204,10 @@ namespace InventoryLibrary
                 p.Add("@MaxTemp", model.MaxTemp);
                 p.Add("@EngineerOne", model.EngineerOne);
                 p.Add("@EngineerTwo", model.EngineerTwo);
-                p.Add("@EngineerOneArrived", model.EngineerOneArrived);
-                p.Add("@EngineerTwoArrived", model.EngineerTwoArrived);
-                p.Add("@EngineerOneLeft", model.EngineerOneLeft);
-                p.Add("@EngineerTwoLeft", model.EngineerTwoLeft);
+                p.Add("@EngineerOneArrived", model.eng_one_arrived);
+                p.Add("@EngineerTwoArrived", model.eng_two_arrived);
+                p.Add("@EngineerOneLeft", model.eng_two_arrived);
+                p.Add("@EngineerTwoLeft", model.eng_two_left);
                 p.Add("@Container", model.Container);
                 p.Add("@ContainerArrived", model.ContainerArrived);
                 p.Add("@ContainerLeft", model.ContainerLeft);
@@ -275,7 +275,7 @@ namespace InventoryLibrary
                 p.Add("@Id", id);
                 p.Add("@JobNumber", model.JobNumber);
                 p.Add("@Client", model.ClientName);
-                p.Add("@gdp", model.Gdp);
+                p.Add("@gdp", model.GDP);
                 p.Add("@modem", model.Modem);
                 p.Add("@ModemVersion", model.ModemVersion);
                 p.Add("@bbp", model.Bullplug);
@@ -284,10 +284,10 @@ namespace InventoryLibrary
                 p.Add("@MaxTemp", model.MaxTemp);
                 p.Add("@EngineerOne", model.EngineerOne);
                 p.Add("@EngineerTwo", model.EngineerTwo);
-                p.Add("@EngineerOneArrived", model.EngineerOneArrived);
-                p.Add("@EngineerTwoArrived", model.EngineerTwoArrived);
-                p.Add("@EngineerOneLeft", model.EngineerOneLeft);
-                p.Add("@EngineerTwoLeft", model.EngineerTwoLeft);
+                p.Add("@EngineerOneArrived", model.eng_one_arrived);
+                p.Add("@EngineerTwoArrived", model.eng_two_arrived);
+                p.Add("@EngineerOneLeft", model.eng_one_left);
+                p.Add("@EngineerTwoLeft", model.eng_two_left);
                 p.Add("@Container", model.Container);
                 p.Add("@ContainerArrived", model.ContainerArrived);
                 p.Add("@ContainerLeft", model.ContainerLeft);
@@ -317,8 +317,8 @@ namespace InventoryLibrary
                 p.Add("@ItemArrived", model.Arrived);
                 p.Add("@ItemInvoice", model.Invoice);
                 p.Add("@ItemCCD", model.CCD);
-                p.Add("@ItemNameRus", model.NameRussian);
-                p.Add("@PositionCCD", model.PositionInCCD);
+                p.Add("@ItemNameRus", model.NameRus);
+                p.Add("@PositionCCD", model.PositionCCD);
                 p.Add("@ItemStatus", model.ItemStatus);
                 p.Add("@ItemBox", model.Box);
                 p.Add("@Container", model.Container);
@@ -340,6 +340,19 @@ namespace InventoryLibrary
                 p.Add("@ItemAsset", asset);
 
                 return connection.Query<ItemModel>("spCheckIfItemExitst", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        // Check if Job alredy exists in DB
+        public static List<JobModel> CheckIfJobExists(string jobNumber)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("GyrodataTracker")))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@JobNumber", jobNumber);
+
+                return connection.Query<JobModel>("spCheckIfJobExists", p, commandType: CommandType.StoredProcedure).ToList();
             }
         }
     }

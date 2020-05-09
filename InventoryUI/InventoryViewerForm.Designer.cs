@@ -101,8 +101,9 @@
             this.extrasButton.Name = "extrasButton";
             this.extrasButton.Size = new System.Drawing.Size(281, 39);
             this.extrasButton.TabIndex = 4;
-            this.extrasButton.Text = "EXTRAS";
+            this.extrasButton.Text = "SETTINGS";
             this.extrasButton.UseVisualStyleBackColor = false;
+            this.extrasButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // exitButton
             // 
@@ -131,6 +132,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.MaximizeBox = false;
             this.Name = "InventoryViewerForm";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
             this.Text = "Sakhalin Inventory";
