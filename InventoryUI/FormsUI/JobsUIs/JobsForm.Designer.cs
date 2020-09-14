@@ -111,8 +111,8 @@
             this.searchJobComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchJobComboBox.FormattingEnabled = true;
             this.searchJobComboBox.Items.AddRange(new object[] {
-            "Job Number",
-            "GDP Sections",
+            "JobNumber",
+            "GDP",
             "Modem",
             "Bullplug",
             "Battery"});

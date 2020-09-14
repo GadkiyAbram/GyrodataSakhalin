@@ -32,7 +32,10 @@ namespace InventoryUI.FormsUI.JobsUIs
             UriBuilder uriBuilder = new UriBuilder();
             uriBuilder.Scheme = "http";
             uriBuilder.Host = Properties.Settings.Default.Host;
-            uriBuilder.Port = Properties.Settings.Default.Port;
+            if (Properties.Settings.Default.Port != 0)
+            {
+                uriBuilder.Port = Properties.Settings.Default.Port;
+            }
             uriBuilder.Path = System.Configuration.ConfigurationManager.AppSettings["PathDataForJobCreate"];
 
             return uriBuilder.Uri;
@@ -42,6 +45,8 @@ namespace InventoryUI.FormsUI.JobsUIs
         {
             List<List<string>> data = null;
             Uri url = UriConnectionForJobCreate();
+
+            //MessageBox.Show(url.ToString());
 
             var client = new WebClient();
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];

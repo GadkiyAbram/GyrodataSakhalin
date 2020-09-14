@@ -1,4 +1,5 @@
-﻿using InventoryUI.FormsUI.JobsUIs;
+﻿using InventoryUI.FormsUI.CidUIs;
+using InventoryUI.FormsUI.JobsUIs;
 using InventoryUI.FormsUI.SettingsUI;
 using System;
 using System.Windows.Forms;
@@ -52,6 +53,12 @@ namespace InventoryUI
                 SettingsForm extras = new SettingsForm();
                 extras.Show();
             }
+        }
+
+        private void cidButton_Click(object sender, EventArgs e)
+        {
+            CidForm cidForm = new CidForm();
+            cidForm.Show();
         }
     }
 }

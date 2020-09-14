@@ -35,6 +35,7 @@
             this.lithiumBatteriesButton = new System.Windows.Forms.Button();
             this.extrasButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.cidButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // GyrodataSakhalinLabel
@@ -109,7 +110,7 @@
             // 
             this.exitButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Location = new System.Drawing.Point(12, 305);
+            this.exitButton.Location = new System.Drawing.Point(12, 410);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(281, 39);
             this.exitButton.TabIndex = 5;
@@ -117,12 +118,27 @@
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // cidButton
+            // 
+            this.cidButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cidButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.cidButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.cidButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cidButton.Location = new System.Drawing.Point(12, 300);
+            this.cidButton.Name = "cidButton";
+            this.cidButton.Size = new System.Drawing.Size(281, 39);
+            this.cidButton.TabIndex = 6;
+            this.cidButton.Text = "CREATE CID";
+            this.cidButton.UseVisualStyleBackColor = false;
+            this.cidButton.Click += new System.EventHandler(this.cidButton_Click);
+            // 
             // InventoryViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(305, 356);
+            this.ClientSize = new System.Drawing.Size(305, 455);
+            this.Controls.Add(this.cidButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.extrasButton);
             this.Controls.Add(this.lithiumBatteriesButton);
@@ -149,6 +165,7 @@
         private System.Windows.Forms.Button lithiumBatteriesButton;
         private System.Windows.Forms.Button extrasButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button cidButton;
     }
 }
 

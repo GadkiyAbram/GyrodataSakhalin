@@ -74,6 +74,8 @@ namespace InventoryUI.FormsUI.BatteryUIs
                 editBatteryCommentText.Text
                 );
 
+            //MessageBox.Show(battery_id.ToString());
+
             ApiHelpers.ApiConnectorHelper.EditData<BatteryModel>(battery_id.ToString(), model, pathBatteryEdit);
         }
     }

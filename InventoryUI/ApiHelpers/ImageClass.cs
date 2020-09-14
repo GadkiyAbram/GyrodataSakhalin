@@ -12,7 +12,7 @@ namespace InventoryUI.ApiHelpers
         private static byte[] GetItemImage(string imgLocation)
         {
             byte[] itemImage = null;
-            if (imgLocation != "")
+            if (imgLocation != null)
             {
                 FileStream stream = new FileStream(imgLocation, FileMode.Open, FileAccess.Read);
                 BinaryReader brs = new BinaryReader(stream);

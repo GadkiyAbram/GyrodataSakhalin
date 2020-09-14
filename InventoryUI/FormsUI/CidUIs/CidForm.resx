@@ -117,27 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="refreshbatteryButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAA8BJREFUWEfVV9tLlEEU9yEIikrqpXqIINMiox4qQlOiNyu3h4RQHzIx7EKlQgmZ
-        qYiRUnSxG5Zi2UMFWWIFRVmC0q6pS7aobd7dy4w++Af0cDpndlx3dsbt604HfjB75nd+53z7zZyZL+q/
-        MbfbPZcxZkNcQ9gRE36//yuBxtJHczbiyrBft6mpqWhMUo7CkwiwiEmKoVgp83OGQukIejpTEiug2HQp
-        Z90AYA4+wa0wsZ8GaZGmlI9sMnmjSWga414vvHW64GGrQ+Adjsln4k6DNC0VEenJX3f1QOblBlh6qBwW
-        ZZcoWIa+zCsNgmOKJZC2TGM2JNE71wJHxj2Qe+shRIclNYE4xKUYkxbCvCZoxeKktuAGRsZge+lNY7JI
-        oJjB0TFFS2LCuDvw76GtppDRB3sqa40JrMCGsT7UMOiWy7QBk01G2+fVzW+NwktyyiDtQj2UPXgBpQga
-        k8/ErW5uUTQlJpVmhQ7qcArJ4/VBXH4VLDxwVhHccvoq2F39CpfwHn00F8olxOVVCa1wPsIm04sCqIUq
-        hEetHbAgqxjm7cuD+fuLhNjqE5XQOzis8EJBc8QJL4K0DPxrMr0ogPq4Qsirewyxe3OhO3kjpKamiyIu
-        Nb1ROCZcRk54Afl1jSauXaYXBWir/3DxefiUtAEmEteAN3GtKMLZP6BwwtHZ54Zn9m6tgJSK2+BwfQbX
-        l6FQ/oRML3YAnWgzk10d4E3ZKpJPg4rwNz4IFdBQ/7odFueUagUQVh2vhPaeviCXcsr0YQV0OoDvSlCS
-        T4MnrwP25DtFvGqDxVln1ORHK5TkBKUAdMy8gv5eYM5O4IcztQJYy0tgPU5FKBw+10e4uDk+WMTKzAJ4
-        npNu4s68AvyhLUJeVaIXcLdG4RhxrwbGNq0QRcRk5MHT9cvBe67IxFUWobYN2YsmrQC+OxGYW+8BQeAc
-        T90muFSEI3YB+LbGCC0DX9mGWiNiXg9wW5JeRMZOYN0fVC4BfTxjl8pNiBMazGM8mGYa0WytmN2vVQSD
-        wsnxwAsOArt+AdiNi2JMPhOX3b+jagagtmIyOiA0ot8H/FiWUdgKKJZZOYzIZjuO2fAQ8Ow0Y4JI4Nl7
-        gQ0NqloBmI9jMpw0XkjY6CjwslPAsRmZkoWCE0pPAhsb1XUCiHxJxb9n9stoeyvwwqPAd2zUE6OPFx4R
-        HGMsgnMe+UpGZuVSyjzjwOxtuL2eAnuOeI9j80oPgjR/9Gb8267l9OSWk4caBv+bD5NQoxVL2waF/v6n
-        WajJZvX3P07/rEVFfQO1I0jJo7bIKgAAAABJRU5ErkJggg==
-</value>
-  </data>
 </root>

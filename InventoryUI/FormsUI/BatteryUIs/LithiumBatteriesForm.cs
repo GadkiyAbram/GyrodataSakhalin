@@ -34,7 +34,7 @@ namespace InventoryUI
         {
             string searchBattery = searchBatteryText.Text;
             string searchItemComboBox = searchBatteryComboBox.Text;
-            BatteriesCustomLoad(searchBatteryText.Text, searchItemComboBox, pathBatteriesAll);
+            BatteriesCustomLoad(searchBattery, searchItemComboBox, pathBatteriesAll);
         }
 
         private void LithiumBatteriesForm_FormClosed(object sender, FormClosedEventArgs e)

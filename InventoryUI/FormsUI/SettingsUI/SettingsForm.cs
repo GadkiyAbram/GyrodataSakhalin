@@ -23,6 +23,7 @@ namespace InventoryUI.FormsUI.SettingsUI
         {
             InitializeComponent();
             LoadInitialUrlPortData();
+            loadConfigValues();
             countExtrasInstance++;
         }
 
@@ -33,20 +34,23 @@ namespace InventoryUI.FormsUI.SettingsUI
 
         private void LoadInitialUrlPortData()
         {
-            urlText.Text = Properties.Settings.Default.Host;
-            portText.Text = Convert.ToString(Properties.Settings.Default.Port);
+            //urlText.Text = Properties.Settings.Default.Host;
+            //portText.Text = Convert.ToString(Properties.Settings.Default.Port);
             tokenFromSettingsText.Text = ConfigurationManager.AppSettings["Token"];
         }
 
         // TODO - move to ApiConnectorHelper
         private Uri UriConnection()
         {
-
             UriBuilder uriBuilder = new UriBuilder();
             uriBuilder.Scheme = "http";
             uriBuilder.Host = Properties.Settings.Default.Host;
-            uriBuilder.Port = Properties.Settings.Default.Port;
+            if (Properties.Settings.Default.Port != 0) {
+                uriBuilder.Port = Properties.Settings.Default.Port;
+            }
             uriBuilder.Path = System.Configuration.ConfigurationManager.AppSettings["PathAuth"];
+
+            //tokenFromSettingsText.Text = uriBuilder.ToString();
 
             return uriBuilder.Uri;
         }
@@ -54,7 +58,8 @@ namespace InventoryUI.FormsUI.SettingsUI
         private void getTokenButton_Click(object sender, EventArgs e)
         {
             string result = null;
-            Uri uriAuth = UriConnection();
+            Uri uriAuth = UriConnection();        // change if the port is NULL not ot add
+            //string uriAuth = "http://demotestapi.cloudapp.net/AuthServices/AuthService.svc/Authenticate";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(uriAuth);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -91,20 +96,52 @@ namespace InventoryUI.FormsUI.SettingsUI
 
         private void tokenFromSettingsButton_Click(object sender, EventArgs e)
         {
-            urlText.Text = Properties.Settings.Default.Host;
-            portText.Text = Convert.ToString(Properties.Settings.Default.Port);
+            //urlText.Text = Properties.Settings.Default.Host;
+            //portText.Text = Convert.ToString(Properties.Settings.Default.Port);
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
             tokenFromSettingsText.Text = token;
         }
 
-        private void saveUrlPortButton_Click(object sender, EventArgs e)
+        private void loadConfigValues() 
         {
-            string host = urlText.Text;
-            string port = portText.Text;
+            Dictionary<string, string> configData = ApiHelpers.ApiConnectorHelper.getConfigData();
+            //urlText.Text = configData["host"];
+            //portText.Text = configData["port"];
 
-            Properties.Settings.Default.Host = host;
+            //string host = urlText.Text;
+            //string port = portText.Text;
+
+            string host = configData["host"];
+            string host_no_scheme = host.Replace("http://", "");
+            string port = configData["port"];
+
+            Properties.Settings.Default.Host = host_no_scheme;
             Properties.Settings.Default.Port = Convert.ToInt32(port);
             Properties.Settings.Default.Save();
+
+            UrlTextBox.Text = host_no_scheme;
+            PortTextBox.Text = port;
+
+            //MessageBox.Show(Properties.Settings.Default.Host.ToString());
+
         }
+
+        // TODO - DELETE AFTER
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+        }
+
+        //private void saveUrlPortButton_Click(object sender, EventArgs e)
+        //{
+        //    string host = urlText.Text;
+        //    string port = portText.Text;
+
+        //    Properties.Settings.Default.Host = host;
+        //    Properties.Settings.Default.Port = Convert.ToInt32(port);
+        //    Properties.Settings.Default.Save();
+        //}
     }
 }

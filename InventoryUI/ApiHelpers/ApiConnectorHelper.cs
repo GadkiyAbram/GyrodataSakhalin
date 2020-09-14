@@ -19,7 +19,11 @@ namespace InventoryUI.ApiHelpers
             UriBuilder uriBuilder = new UriBuilder();
             uriBuilder.Scheme = "http";
             uriBuilder.Host = Properties.Settings.Default.Host;
-            uriBuilder.Port = Properties.Settings.Default.Port;
+            if (Properties.Settings.Default.Port != 0)
+            {
+                uriBuilder.Port = Properties.Settings.Default.Port;
+            }
+            //uriBuilder.Port = Properties.Settings.Default.Port;
             uriBuilder.Path = System.Configuration.ConfigurationManager.AppSettings[path];
 
             return uriBuilder.Uri;
@@ -29,6 +33,7 @@ namespace InventoryUI.ApiHelpers
         {
             Uri url = ApiConnectorHelper.UriConnection(path);
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"/{id}");
+
             httpWebRequest.ContentType = "application/json";
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
             httpWebRequest.Headers.Add("Token", token);
@@ -91,6 +96,7 @@ namespace InventoryUI.ApiHelpers
         {
             int output = 0;
             Uri url = ApiConnectorHelper.UriConnection(path);
+
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "application/json";
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
@@ -123,6 +129,8 @@ namespace InventoryUI.ApiHelpers
         {
             List<T> items = new List<T>();
             Uri url = ApiConnectorHelper.UriConnection(path);
+            //MessageBox.Show(url.ToString());
+
             var client = new WebClient();
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
             client.Headers["Token"] = token;
@@ -145,6 +153,7 @@ namespace InventoryUI.ApiHelpers
             {
                 MessageBox.Show(ex.ToString());
             }
+
             return items;
         }
 
@@ -160,7 +169,6 @@ namespace InventoryUI.ApiHelpers
 
             try
             {
-
                 var content = client.DownloadString(url + "?item=" + item + "&asset=" + asset);
 
                 if (content != null)
@@ -183,6 +191,8 @@ namespace InventoryUI.ApiHelpers
             List<T> items = new List<T>();
             Uri url = ApiConnectorHelper.UriConnection(path);
 
+            
+
             var client = new WebClient();
             string token = System.Configuration.ConfigurationManager.AppSettings["Token"];
             client.Headers["Token"] = token;
@@ -190,7 +200,6 @@ namespace InventoryUI.ApiHelpers
 
             try
             {
-
                 var content = client.DownloadString(url + "/" + jobnumber);
 
                 if (content != null)
@@ -207,6 +216,38 @@ namespace InventoryUI.ApiHelpers
                 MessageBox.Show(ex.ToString());
             }
             return items;
+        }
+
+        public static Dictionary<string, string> getConfigData()
+        {
+            Dictionary<string, string> data = null;
+            // AZURE
+            //string url = "http://demotestapi.cloudapp.net/AuthServices/AuthService.svc/sentConfig";
+            string url = System.Configuration.ConfigurationManager.AppSettings["Configs"];
+            // Local
+            //string url = "http://192.168.0.102:8081/AuthServices/AuthService.svc/sentConfig";
+
+            var client = new WebClient();
+            client.Headers.Add("Content-Type", "application/json");
+
+            try
+            {
+                var content = client.DownloadString(url);
+
+                if (content != null)
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+                    using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
+                    {
+                        data = (Dictionary<string, string>)serializer.ReadObject(ms);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return data;
         }
     }
 }

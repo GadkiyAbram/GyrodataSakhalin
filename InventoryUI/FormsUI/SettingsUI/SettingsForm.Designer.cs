@@ -36,14 +36,12 @@
             this.usernameLabel = new System.Windows.Forms.Label();
             this.tokenFromSettingsButton = new System.Windows.Forms.Button();
             this.tokenFromSettingsText = new System.Windows.Forms.RichTextBox();
-            this.UrlPortBox = new System.Windows.Forms.GroupBox();
-            this.saveUrlPortButton = new System.Windows.Forms.Button();
-            this.portText = new System.Windows.Forms.TextBox();
-            this.urlText = new System.Windows.Forms.TextBox();
-            this.portLabel = new System.Windows.Forms.Label();
-            this.urlLabel = new System.Windows.Forms.Label();
+            this.PortTextBox = new System.Windows.Forms.TextBox();
+            this.UrlTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             this.authGroupBox.SuspendLayout();
-            this.UrlPortBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // authGroupBox
@@ -54,12 +52,12 @@
             this.authGroupBox.Controls.Add(this.passwordLabel);
             this.authGroupBox.Controls.Add(this.usernameLabel);
             this.authGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.authGroupBox.Location = new System.Drawing.Point(9, 150);
+            this.authGroupBox.Location = new System.Drawing.Point(9, 12);
             this.authGroupBox.Name = "authGroupBox";
             this.authGroupBox.Size = new System.Drawing.Size(284, 145);
             this.authGroupBox.TabIndex = 0;
             this.authGroupBox.TabStop = false;
-            this.authGroupBox.Text = "Request Token";
+            this.authGroupBox.Text = "Authorize";
             // 
             // getTokenButton
             // 
@@ -69,28 +67,31 @@
             this.getTokenButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.getTokenButton.Location = new System.Drawing.Point(6, 104);
             this.getTokenButton.Name = "getTokenButton";
-            this.getTokenButton.Size = new System.Drawing.Size(259, 31);
+            this.getTokenButton.Size = new System.Drawing.Size(263, 31);
             this.getTokenButton.TabIndex = 5;
-            this.getTokenButton.Text = "GET TOKEN";
+            this.getTokenButton.Text = "SIGN IN";
             this.getTokenButton.UseVisualStyleBackColor = false;
             this.getTokenButton.Click += new System.EventHandler(this.getTokenButton_Click);
             // 
             // passwordText
             // 
+            this.passwordText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.passwordText.Location = new System.Drawing.Point(114, 61);
             this.passwordText.Name = "passwordText";
-            this.passwordText.Size = new System.Drawing.Size(155, 29);
+            this.passwordText.Size = new System.Drawing.Size(155, 25);
             this.passwordText.TabIndex = 3;
-            this.passwordText.Text = "pass1";
+            this.passwordText.Text = "12341234";
             this.passwordText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.passwordText.UseSystemPasswordChar = true;
             // 
             // usernameText
             // 
+            this.usernameText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.usernameText.Location = new System.Drawing.Point(114, 25);
             this.usernameText.Name = "usernameText";
-            this.usernameText.Size = new System.Drawing.Size(155, 29);
+            this.usernameText.Size = new System.Drawing.Size(155, 25);
             this.usernameText.TabIndex = 2;
-            this.usernameText.Text = "user1";
+            this.usernameText.Text = "admin@admin.com";
             this.usernameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // passwordLabel
@@ -99,7 +100,7 @@
             this.passwordLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(6, 64);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(77, 21);
+            this.passwordLabel.Size = new System.Drawing.Size(76, 21);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
@@ -135,89 +136,75 @@
             this.tokenFromSettingsText.TabIndex = 7;
             this.tokenFromSettingsText.Text = "";
             // 
-            // UrlPortBox
+            // PortTextBox
             // 
-            this.UrlPortBox.Controls.Add(this.saveUrlPortButton);
-            this.UrlPortBox.Controls.Add(this.portText);
-            this.UrlPortBox.Controls.Add(this.urlText);
-            this.UrlPortBox.Controls.Add(this.portLabel);
-            this.UrlPortBox.Controls.Add(this.urlLabel);
-            this.UrlPortBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UrlPortBox.Location = new System.Drawing.Point(12, 12);
-            this.UrlPortBox.Name = "UrlPortBox";
-            this.UrlPortBox.Size = new System.Drawing.Size(281, 139);
-            this.UrlPortBox.TabIndex = 6;
-            this.UrlPortBox.TabStop = false;
-            this.UrlPortBox.Text = "URL/Port";
+            this.PortTextBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.PortTextBox.Location = new System.Drawing.Point(138, 199);
+            this.PortTextBox.Name = "PortTextBox";
+            this.PortTextBox.Size = new System.Drawing.Size(155, 25);
+            this.PortTextBox.TabIndex = 9;
+            this.PortTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // saveUrlPortButton
+            // UrlTextBox
             // 
-            this.saveUrlPortButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveUrlPortButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.saveUrlPortButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.saveUrlPortButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveUrlPortButton.Location = new System.Drawing.Point(10, 96);
-            this.saveUrlPortButton.Name = "saveUrlPortButton";
-            this.saveUrlPortButton.Size = new System.Drawing.Size(259, 31);
-            this.saveUrlPortButton.TabIndex = 5;
-            this.saveUrlPortButton.Text = "SAVE";
-            this.saveUrlPortButton.UseVisualStyleBackColor = false;
-            this.saveUrlPortButton.Click += new System.EventHandler(this.saveUrlPortButton_Click);
+            this.UrlTextBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.UrlTextBox.Location = new System.Drawing.Point(138, 163);
+            this.UrlTextBox.Name = "UrlTextBox";
+            this.UrlTextBox.Size = new System.Drawing.Size(155, 25);
+            this.UrlTextBox.TabIndex = 8;
+            this.UrlTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // portText
+            // label1
             // 
-            this.portText.Location = new System.Drawing.Point(69, 60);
-            this.portText.Name = "portText";
-            this.portText.Size = new System.Drawing.Size(200, 29);
-            this.portText.TabIndex = 3;
-            this.portText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 199);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 21);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "PORT";
             // 
-            // urlText
+            // label2
             // 
-            this.urlText.Location = new System.Drawing.Point(69, 25);
-            this.urlText.Name = "urlText";
-            this.urlText.Size = new System.Drawing.Size(200, 29);
-            this.urlText.TabIndex = 2;
-            this.urlText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(15, 163);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 21);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "URL";
             // 
-            // portLabel
+            // btnReset
             // 
-            this.portLabel.AutoSize = true;
-            this.portLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portLabel.Location = new System.Drawing.Point(6, 63);
-            this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(39, 21);
-            this.portLabel.TabIndex = 1;
-            this.portLabel.Text = "Port";
+            this.btnReset.Location = new System.Drawing.Point(9, 253);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 10;
+            this.btnReset.Text = "RESET";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // urlLabel
-            // 
-            this.urlLabel.AutoSize = true;
-            this.urlLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.urlLabel.Location = new System.Drawing.Point(6, 28);
-            this.urlLabel.Name = "urlLabel";
-            this.urlLabel.Size = new System.Drawing.Size(39, 21);
-            this.urlLabel.TabIndex = 0;
-            this.urlLabel.Text = "URL";
-            // 
-            // ExtrasForm
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(304, 473);
-            this.Controls.Add(this.UrlPortBox);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.PortTextBox);
+            this.Controls.Add(this.UrlTextBox);
             this.Controls.Add(this.tokenFromSettingsText);
             this.Controls.Add(this.tokenFromSettingsButton);
             this.Controls.Add(this.authGroupBox);
-            this.Name = "ExtrasForm";
+            this.Name = "SettingsForm";
             this.Text = "Extras";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExtrasForm_FormClosed);
             this.authGroupBox.ResumeLayout(false);
             this.authGroupBox.PerformLayout();
-            this.UrlPortBox.ResumeLayout(false);
-            this.UrlPortBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -231,11 +218,10 @@
         private System.Windows.Forms.Button getTokenButton;
         private System.Windows.Forms.Button tokenFromSettingsButton;
         private System.Windows.Forms.RichTextBox tokenFromSettingsText;
-        private System.Windows.Forms.GroupBox UrlPortBox;
-        private System.Windows.Forms.Button saveUrlPortButton;
-        private System.Windows.Forms.TextBox portText;
-        private System.Windows.Forms.TextBox urlText;
-        private System.Windows.Forms.Label portLabel;
-        private System.Windows.Forms.Label urlLabel;
+        private System.Windows.Forms.TextBox PortTextBox;
+        private System.Windows.Forms.TextBox UrlTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnReset;
     }
 }

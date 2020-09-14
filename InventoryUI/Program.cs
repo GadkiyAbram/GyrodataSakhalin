@@ -22,7 +22,13 @@ namespace InventoryUI
             InventoryLibrary.GlobalConfig.InitializeConnections(true);
 
             Application.Run(new InventoryViewerForm());
+            
             //Application.Run(new ErrorForm(new List<string>()));
+
+            // TO RESET HOST / PORT
+            //Properties.Settings.Default.Reset();
+            //Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Reload();
         }
     }
 }
